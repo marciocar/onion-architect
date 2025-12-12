@@ -1,0 +1,22 @@
+{
+  "name": "onion-app",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Onion App - SaaS platform for AI-first knowledge management",
+  "license": "UNLICENSED",
+  "scripts": {
+    "nx": "nx"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.1",
+    "@vitest/ui": "^4.0.15",
+    "nx": "^22.2.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.15",
+    "yaml": "^2.8.2"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}

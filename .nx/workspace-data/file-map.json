@@ -1,0 +1,1187 @@
+{
+  "version": "6.0",
+  "nxVersion": "22.2.1",
+  "pathMappings": {
+    "@onion/poc": [
+      "libs/poc/src/index.ts"
+    ]
+  },
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "nonProjectFiles": [
+      {
+        "file": ".cursor/commands/git/sync.md",
+        "hash": "5866315271787032006"
+      },
+      {
+        "file": "docs/knowbase/concepts/task-manager-abstraction.md",
+        "hash": "1696838961233919049"
+      },
+      {
+        "file": ".cursor/commands/validate/test-strategy/analyze.md",
+        "hash": "7560888889923396882"
+      },
+      {
+        "file": ".cursor/commands/meta/all-tools.md",
+        "hash": "9007662850574907961"
+      },
+      {
+        "file": ".cursor/agents/development/system-documentation-orchestrator.md",
+        "hash": "9538330904794203216"
+      },
+      {
+        "file": ".cursor/commands/docs/build-index.md",
+        "hash": "7404514385725881073"
+      },
+      {
+        "file": ".cursor/docs/onion/practical-examples.md",
+        "hash": "3757906037386573102"
+      },
+      {
+        "file": "docs/technical-context/CODEBASE_GUIDE.md",
+        "hash": "7926573889828588105"
+      },
+      {
+        "file": ".cursor/docs/product/story-points-integration.md",
+        "hash": "3972766035246758298"
+      },
+      {
+        "file": ".cursor/commands/common/templates/technical_context_template.md",
+        "hash": "5961710036645216489"
+      },
+      {
+        "file": ".cursor/docs/clickup/clickup-auto-update-strategy.md",
+        "hash": "7008309897651759058"
+      },
+      {
+        "file": "docs/knowbase/concepts/spec-as-code-strategy.md",
+        "hash": "5737190910866050684"
+      },
+      {
+        "file": ".cursor/commands/common/prompts/clickup-patterns.md",
+        "hash": "17353572850774014928"
+      },
+      {
+        "file": ".cursor/commands/test/integration.md",
+        "hash": "5541990655179966058"
+      },
+      {
+        "file": ".cursor/commands/docs/sync-sessions.md",
+        "hash": "537152644648811236"
+      },
+      {
+        "file": ".cursor/docs/templates/solution-template.md",
+        "hash": "12310508500240781562"
+      },
+      {
+        "file": ".cursor/agents/meta/command-creator-specialist.md",
+        "hash": "9336842318566389685"
+      },
+      {
+        "file": "docs/onion/consolidated-project-documentation.md",
+        "hash": "879412060896589829"
+      },
+      {
+        "file": "docs/technical-context/adr/003-prisma-orm.md",
+        "hash": "150781345097805117"
+      },
+      {
+        "file": ".cursor/commands/git/release/finish.md",
+        "hash": "7176489340297406424"
+      },
+      {
+        "file": ".cursor/agents/meta/onion.md",
+        "hash": "3510617572837636076"
+      },
+      {
+        "file": ".cursorrules",
+        "hash": "3455929239434228217"
+      },
+      {
+        "file": "docs/technical-context/API_SPECIFICATION.md",
+        "hash": "12081227256027212364"
+      },
+      {
+        "file": "docs/technical-context/CONTRIBUTING.md",
+        "hash": "5514895346849641364"
+      },
+      {
+        "file": ".cursor/commands/product/feature.md",
+        "hash": "12291862473080634211"
+      },
+      {
+        "file": ".cursor/commands/test/unit.md",
+        "hash": "6580989956883424403"
+      },
+      {
+        "file": "docs/knowbase/frameworks/framework_story_points.md",
+        "hash": "16278153838948513103"
+      },
+      {
+        "file": ".cursor/agents/git/branch-documentation-writer.md",
+        "hash": "2976528345745817371"
+      },
+      {
+        "file": ".cursor/docs/onion/clickup-integration.md",
+        "hash": "5413409800270009499"
+      },
+      {
+        "file": ".cursor/commands/common/prompts/technical.md",
+        "hash": "12666467954595188250"
+      },
+      {
+        "file": ".cursor/commands/git/release/start.md",
+        "hash": "14561910211057559828"
+      },
+      {
+        "file": "docs/technical-context/POC_PLAN.md",
+        "hash": "11561909293821330365"
+      },
+      {
+        "file": ".cursor/commands/engineer/pr-update.md",
+        "hash": "6491031824260738484"
+      },
+      {
+        "file": "docs/onion/tools-reference.md",
+        "hash": "7018505664329156056"
+      },
+      {
+        "file": "docs/onion/engineering-flows.md",
+        "hash": "13410137408732104130"
+      },
+      {
+        "file": ".cursor/utils/task-manager/factory.md",
+        "hash": "9172479202894043757"
+      },
+      {
+        "file": "docs/business-context/CUSTOMER_PERSONAS.md",
+        "hash": "16947616683576974983"
+      },
+      {
+        "file": "docs/knowbase/concepts/configuration-management.md",
+        "hash": "1981647222958417327"
+      },
+      {
+        "file": ".cursor/docs/strategies/clickup-regression-tests.md",
+        "hash": "5416032180534342356"
+      },
+      {
+        "file": ".cursor/docs/clickup/separador-tamanho-otimizado.md",
+        "hash": "7547161966958307861"
+      },
+      {
+        "file": ".cursor/docs/product/story-points-validation.md",
+        "hash": "4883571326073140312"
+      },
+      {
+        "file": ".cursor/docs/templates/guide-template.md",
+        "hash": "1747997885964037393"
+      },
+      {
+        "file": "docs/business-context/PRODUCT_STRATEGY.md",
+        "hash": "11654165980324050662"
+      },
+      {
+        "file": ".cursor/commands/common/prompts/README.md",
+        "hash": "793028412418381511"
+      },
+      {
+        "file": "docs/technical-context/project_charter.md",
+        "hash": "2350438778165210084"
+      },
+      {
+        "file": ".cursor/commands/product/estimate.md",
+        "hash": "14884532389687060033"
+      },
+      {
+        "file": ".cursor/commands/product/analyze-pain-price.md",
+        "hash": "1730948694513144617"
+      },
+      {
+        "file": "docs/business-context/features/rules-system.md",
+        "hash": "8967714690258293210"
+      },
+      {
+        "file": ".cursor/docs/templates/phase-execution-prompt-template.md",
+        "hash": "360891063206093710"
+      },
+      {
+        "file": ".cursor/agents/testing/test-planner.md",
+        "hash": "15768014990543712665"
+      },
+      {
+        "file": ".cursor/commands/product/extract-meeting.md",
+        "hash": "6075833624928650742"
+      },
+      {
+        "file": ".cursor/docs/clickup/clickup-comment-formatter.md",
+        "hash": "6906071597313842987"
+      },
+      {
+        "file": ".cursor/commands/git/hotfix/finish.md",
+        "hash": "7029391586109979540"
+      },
+      {
+        "file": "package.json",
+        "hash": "4710522040915305294"
+      },
+      {
+        "file": ".cursor/commands/test/e2e.md",
+        "hash": "4363031114264262793"
+      },
+      {
+        "file": ".cursor/commands/product/checklist-sync.md",
+        "hash": "691418676854320537"
+      },
+      {
+        "file": ".cursor/agents/testing/test-engineer.md",
+        "hash": "3975589039507978226"
+      },
+      {
+        "file": ".cursor/commands/product/README.md",
+        "hash": "6574764928524571407"
+      },
+      {
+        "file": "docs/technical-context/adr/008-design-system.md",
+        "hash": "8415752313057888079"
+      },
+      {
+        "file": "docs/business-context/MESSAGING_FRAMEWORK.md",
+        "hash": "11863813590073442399"
+      },
+      {
+        "file": ".cursor/commands/validate/collab/pair-testing.md",
+        "hash": "6914519973552456495"
+      },
+      {
+        "file": ".cursor/commands/engineer/docs.md",
+        "hash": "11152172015200688192"
+      },
+      {
+        "file": ".cursor/agents/development/postgres-specialist.md",
+        "hash": "5074151612864411812"
+      },
+      {
+        "file": ".cursor/rules/language-and-documentation.mdc",
+        "hash": "14079741038216969454"
+      },
+      {
+        "file": ".cursor/docs/architecture/desacoplamento-roadmap.md",
+        "hash": "10025717942516555128"
+      },
+      {
+        "file": ".cursor/agents/development/mermaid-specialist.md",
+        "hash": "11605837456940465822"
+      },
+      {
+        "file": ".cursor/commands/product/consolidate-meetings.md",
+        "hash": "5309761145130398389"
+      },
+      {
+        "file": ".cursor/agents/development/nx-monorepo-specialist.md",
+        "hash": "17708660858536057019"
+      },
+      {
+        "file": ".cursor/agents/product/pain-price-specialist.md",
+        "hash": "13620852613460425617"
+      },
+      {
+        "file": ".cursor/docs/templates/adr-template.md",
+        "hash": "8953890423605133438"
+      },
+      {
+        "file": ".cursorignore",
+        "hash": "14086646643039130969"
+      },
+      {
+        "file": ".cursor/commands/warm-up.md",
+        "hash": "9357924483454622781"
+      },
+      {
+        "file": "docs/knowbase/platforms/runflow.md",
+        "hash": "14201365561942686628"
+      },
+      {
+        "file": "docs/technical-context/BUSINESS_LOGIC.md",
+        "hash": "17840961670026821259"
+      },
+      {
+        "file": "docs/onion/getting-started.md",
+        "hash": "4852545394116162397"
+      },
+      {
+        "file": "docs/knowbase/frameworks/framework_testes.md",
+        "hash": "1675926782037488750"
+      },
+      {
+        "file": "docs/knowbase/tools/cursor-commands-best-practices-2025.md",
+        "hash": "7145768683586860147"
+      },
+      {
+        "file": ".cursor/commands/product/task.md",
+        "hash": "14438332038074397590"
+      },
+      {
+        "file": ".cursor/commands/validate/qa-points/estimate.md",
+        "hash": "8726865811491913552"
+      },
+      {
+        "file": ".env.example",
+        "hash": "2256570266743035357"
+      },
+      {
+        "file": "docs/business-context/CUSTOMER_JOURNEY.md",
+        "hash": "15882650072134522315"
+      },
+      {
+        "file": ".cursor/agents/development/c4-documentation-specialist.md",
+        "hash": "16189524447560300016"
+      },
+      {
+        "file": ".cursor/utils/task-manager/detector.md",
+        "hash": "11613058530105245043"
+      },
+      {
+        "file": ".cursor/agents/review/code-reviewer.md",
+        "hash": "13118918742321834309"
+      },
+      {
+        "file": ".cursor/agents/compliance/pmbok-specialist.md",
+        "hash": "4920556699078750493"
+      },
+      {
+        "file": ".cursor/commands/meta/analyze-complex-problem.md",
+        "hash": "9253042670425373290"
+      },
+      {
+        "file": "docs/INDEX.md",
+        "hash": "11116063638808610318"
+      },
+      {
+        "file": ".cursor/commands/product/refine.md",
+        "hash": "2176388903904256611"
+      },
+      {
+        "file": "docs/business-context/INDUSTRY_TRENDS.md",
+        "hash": "11639867174979860471"
+      },
+      {
+        "file": ".cursor/agents/development/docs-reverse-engineer.md",
+        "hash": "2900374900397850934"
+      },
+      {
+        "file": ".cursor/commands/meta/create-abstraction.md",
+        "hash": "8826263080891581148"
+      },
+      {
+        "file": ".cursor/commands/git/README.md",
+        "hash": "14880590827880749106"
+      },
+      {
+        "file": ".cursor/docs/clickup/clickup-dual-comment-strategy.md",
+        "hash": "4940270615227159752"
+      },
+      {
+        "file": ".cursor/commands/product/validate-task.md",
+        "hash": "93901982205803756"
+      },
+      {
+        "file": ".cursor/docs/clickup/clickup-formatting.md",
+        "hash": "15317221904039393122"
+      },
+      {
+        "file": ".cursor/agents/development/nodejs-specialist.md",
+        "hash": "12621861207696024095"
+      },
+      {
+        "file": "docs/knowbase/concepts/identificar-precificar-dor-cliente.md",
+        "hash": "1294022003548080360"
+      },
+      {
+        "file": ".cursor/commands/validate/workflow.md",
+        "hash": "10829133992035390993"
+      },
+      {
+        "file": "README.md",
+        "hash": "4324011973943403080"
+      },
+      {
+        "file": ".cursor/docs/onion/naming-conventions.md",
+        "hash": "16855315819268248022"
+      },
+      {
+        "file": ".cursor/commands/onion.md",
+        "hash": "1541452932362938312"
+      },
+      {
+        "file": "docs/technical-context/index.md",
+        "hash": "1629157901232640686"
+      },
+      {
+        "file": "docs/technical-context/adr/001-monorepo-nx.md",
+        "hash": "5716900523037124596"
+      },
+      {
+        "file": ".cursor/docs/onion/commands-guide.md",
+        "hash": "1910893928824246847"
+      },
+      {
+        "file": ".cursor/docs/tools/commands.md",
+        "hash": "2443171535919864435"
+      },
+      {
+        "file": ".cursor/commands/docs/validate-docs.md",
+        "hash": "2066381992013614595"
+      },
+      {
+        "file": ".cursor/docs/onion/maintenance-checklist.md",
+        "hash": "1292603794261974197"
+      },
+      {
+        "file": ".cursor/agents/compliance/iso-27001-specialist.md",
+        "hash": "14256347438516928768"
+      },
+      {
+        "file": ".cursor/docs/tools/rules.md",
+        "hash": "4948647714140981148"
+      },
+      {
+        "file": "docs/onion/testing-validation-system.md",
+        "hash": "966913768454784595"
+      },
+      {
+        "file": "docs/technical-context/adr/006-logto-self-hosted.md",
+        "hash": "8078955706204598466"
+      },
+      {
+        "file": ".cursor/agents/product/extract-meeting-specialist.md",
+        "hash": "8424245299846986531"
+      },
+      {
+        "file": ".cursor/commands/meta/setup-integration.md",
+        "hash": "921156359664185662"
+      },
+      {
+        "file": ".cursor/commands/git/feature/finish.md",
+        "hash": "1055933946774279768"
+      },
+      {
+        "file": "docs/onion/commands-guide.md",
+        "hash": "15966391311583822086"
+      },
+      {
+        "file": ".cursor/docs/onion/agents-reference.md",
+        "hash": "4602753935835016475"
+      },
+      {
+        "file": ".cursor/docs/strategies/clickup-integration-tests.md",
+        "hash": "707359067450131072"
+      },
+      {
+        "file": "docs/technical-context/TROUBLESHOOTING.md",
+        "hash": "1532742026641768703"
+      },
+      {
+        "file": ".cursor/docs/onion/engineering-flows.md",
+        "hash": "11851394711400704632"
+      },
+      {
+        "file": "docs/business-context/features/command-workflows.md",
+        "hash": "15203784912814287675"
+      },
+      {
+        "file": ".cursor/agents/product/meeting-consolidator.md",
+        "hash": "11627449399738277522"
+      },
+      {
+        "file": ".cursor/commands/git/init.md",
+        "hash": "7939587734857620425"
+      },
+      {
+        "file": ".cursor/utils/task-manager/adapters/clickup.md",
+        "hash": "16988628590806290138"
+      },
+      {
+        "file": ".cursor/commands/git/feature/publish.md",
+        "hash": "6119198569099319625"
+      },
+      {
+        "file": ".cursor/agents/testing/test-agent.md",
+        "hash": "15456033595150188809"
+      },
+      {
+        "file": ".cursor/commands/docs/build-business-docs.md",
+        "hash": "5422044275716082199"
+      },
+      {
+        "file": ".cursor/commands/engineer/start.md",
+        "hash": "11955431934143019432"
+      },
+      {
+        "file": ".cursor/commands/meta/create-command.md",
+        "hash": "14787876063441101795"
+      },
+      {
+        "file": ".cursor/docs/strategies/clickup-mcp-wrappers-tests.md",
+        "hash": "13819221913131008251"
+      },
+      {
+        "file": ".cursor/utils/clickup-mcp-wrappers.md",
+        "hash": "7427387404284867296"
+      },
+      {
+        "file": ".cursor/rules/onion-patterns.mdc",
+        "hash": "16439710751642815641"
+      },
+      {
+        "file": ".cursor/commands/common/templates/abstraction-template.md",
+        "hash": "9951733906227535568"
+      },
+      {
+        "file": ".cursor/commands/product/branding.md",
+        "hash": "2230979258262247925"
+      },
+      {
+        "file": "docs/business-context/features/agent-management.md",
+        "hash": "6676735577699102624"
+      },
+      {
+        "file": ".cursor/commands/git/code-review.md",
+        "hash": "18197616498884249151"
+      },
+      {
+        "file": ".cursor/commands/git/fast-commit.md",
+        "hash": "7551220547582538707"
+      },
+      {
+        "file": ".cursor/agents/product/presentation-orchestrator.md",
+        "hash": "16495333550744947624"
+      },
+      {
+        "file": ".cursor/agents/development/task-specialist.md",
+        "hash": "9771139818483381104"
+      },
+      {
+        "file": ".cursor/commands/engineer/bump.md",
+        "hash": "11823843917675631715"
+      },
+      {
+        "file": "pnpm-workspace.yaml",
+        "hash": "10732915382238803442"
+      },
+      {
+        "file": ".cursor/commands/docs/docs-health.md",
+        "hash": "8481920441919312889"
+      },
+      {
+        "file": ".cursor/commands/common/prompts/validation-rules.md",
+        "hash": "15797334765203067511"
+      },
+      {
+        "file": ".cursor/commands/docs/build-tech-docs.md",
+        "hash": "1503758756004856454"
+      },
+      {
+        "file": ".cursor/docs/strategies/clickup-comment-patterns.md",
+        "hash": "55382865326637859"
+      },
+      {
+        "file": ".cursor/utils/task-manager/types.md",
+        "hash": "6204249224677737587"
+      },
+      {
+        "file": ".cursor/commands/product/check.md",
+        "hash": "14308568887731754069"
+      },
+      {
+        "file": ".cursor/docs/templates/analysis-template.md",
+        "hash": "13906979398575927824"
+      },
+      {
+        "file": "docs/onion/practical-examples.md",
+        "hash": "1812416039514534923"
+      },
+      {
+        "file": "docs/business-context/index.md",
+        "hash": "17290058842287148030"
+      },
+      {
+        "file": "docs/business-context/COMPETITIVE_LANDSCAPE.md",
+        "hash": "7275457423557806799"
+      },
+      {
+        "file": "docs/onion/sistema-engenharia-reversa-guia-uso.md",
+        "hash": "15443264164301701686"
+      },
+      {
+        "file": "docs/knowbase/concepts/context-window-optimization.md",
+        "hash": "17558248863634093783"
+      },
+      {
+        "file": "docs/technical-context/CURSOR.meta.md",
+        "hash": "11836897405670135589"
+      },
+      {
+        "file": "docs/onion/phase-subtask-sync-fix.md",
+        "hash": "9702246889362003433"
+      },
+      {
+        "file": ".cursor/commands/development/runflow-dev.md",
+        "hash": "15272138399358263564"
+      },
+      {
+        "file": ".cursor/agents/git/branch-metaspec-checker.md",
+        "hash": "13710658934754671040"
+      },
+      {
+        "file": ".cursor/agents/meta/agent-creator-specialist.md",
+        "hash": "703730836007326247"
+      },
+      {
+        "file": "docs/business-context/SALES_PROCESS.md",
+        "hash": "15304522402165506468"
+      },
+      {
+        "file": ".cursor/docs/tools/mcps.md",
+        "hash": "7328863816948147640"
+      },
+      {
+        "file": ".cursor/agents/development/c4-architecture-specialist.md",
+        "hash": "16969759353868419830"
+      },
+      {
+        "file": ".cursor/commands/quick/analisys.md",
+        "hash": "8118806853002375892"
+      },
+      {
+        "file": ".cursor/rules/nx-rules.mdc",
+        "hash": "6502536552109798806"
+      },
+      {
+        "file": ".cursor/commands/git/help.md",
+        "hash": "7439771400174644012"
+      },
+      {
+        "file": ".cursor/agents/development/linux-security-specialist.md",
+        "hash": "4748621457600665612"
+      },
+      {
+        "file": ".cursor/agents/development/cursor-specialist.md",
+        "hash": "6389390448140899631"
+      },
+      {
+        "file": ".cursor/agents/development/react-developer.md",
+        "hash": "18219110516291400233"
+      },
+      {
+        "file": ".cursor/docs/clickup/clickup-acceptance-criteria-strategy.md",
+        "hash": "15032037626273847575"
+      },
+      {
+        "file": ".cursor/agents/development/gamma-api-specialist.md",
+        "hash": "8147136718569609782"
+      },
+      {
+        "file": ".cursor/utils/task-manager/adapters/asana.md",
+        "hash": "4581959847356056857"
+      },
+      {
+        "file": ".cursor/docs/templates/reference-template.md",
+        "hash": "259053801250190522"
+      },
+      {
+        "file": ".cursor/commands/product/presentation.md",
+        "hash": "10827380858742255646"
+      },
+      {
+        "file": "CHANGELOG-ONION-V3.md",
+        "hash": "4909763846198438959"
+      },
+      {
+        "file": "docs/plans/flagsmith-poc-execution-plan.md",
+        "hash": "3942327388848995701"
+      },
+      {
+        "file": "docs/knowbase/concepts/framework_story_points.md",
+        "hash": "16278153838948513103"
+      },
+      {
+        "file": ".cursor/commands/meta/create-knowledge-base.md",
+        "hash": "101272490667652806"
+      },
+      {
+        "file": ".github/workflows/code-review.yml",
+        "hash": "14454340455034512982"
+      },
+      {
+        "file": ".cursor/agents/product/branding-positioning-specialist.md",
+        "hash": "11161372245047824441"
+      },
+      {
+        "file": ".cursor/commands/common/templates/command-template.md",
+        "hash": "11941830020157905230"
+      },
+      {
+        "file": "docs/knowbase/concepts/ai-agent-design-patterns.md",
+        "hash": "4785458621369645681"
+      },
+      {
+        "file": ".cursor/docs/architecture/acoplamento-clickup-problema-analise.md",
+        "hash": "12923814699720954847"
+      },
+      {
+        "file": ".cursor/docs/architecture/validacao-fase-1.md",
+        "hash": "10524772206804559059"
+      },
+      {
+        "file": ".cursor/docs/c4/c4-detection-rules.md",
+        "hash": "12369321329257074862"
+      },
+      {
+        "file": ".cursor/commands/meta/create-task-structure.md",
+        "hash": "12954781892819812978"
+      },
+      {
+        "file": "docs/onion/agents-reference.md",
+        "hash": "5502412540531133849"
+      },
+      {
+        "file": ".cursor/docs/engineer/pre-pr-acceptance-validation.md",
+        "hash": "608512951272573314"
+      },
+      {
+        "file": "docs/technical-context/adr/005-zod-everywhere.md",
+        "hash": "6350308398490905927"
+      },
+      {
+        "file": ".cursor/commands/common/prompts/code-review-checklist.md",
+        "hash": "5304625327940493857"
+      },
+      {
+        "file": "docs/business-context/features/knowledge-management.md",
+        "hash": "11166746741255459826"
+      },
+      {
+        "file": ".cursor/commands/engineer/validate-phase-sync.md",
+        "hash": "17012086563303189271"
+      },
+      {
+        "file": ".cursor/commands/engineer/plan.md",
+        "hash": "12169279036986127958"
+      },
+      {
+        "file": ".cursor/commands/engineer/pre-pr.md",
+        "hash": "13025965068436203880"
+      },
+      {
+        "file": "docs/meta-specs/index.md",
+        "hash": "9489161284262467116"
+      },
+      {
+        "file": ".cursor/commands/product/warm-up.md",
+        "hash": "4240179068739674134"
+      },
+      {
+        "file": "docs/business-context/CUSTOMER_COMMUNICATION.md",
+        "hash": "12664175195990695874"
+      },
+      {
+        "file": ".cursor/commands/common/prompts/output-formats.md",
+        "hash": "4688303967277063988"
+      },
+      {
+        "file": "docs/knowbase/concepts/framework_testes.md",
+        "hash": "1675926782037488750"
+      },
+      {
+        "file": "docs/knowbase/concepts/specification-driven-ai-abstraction-layer.md",
+        "hash": "3541027344147346178"
+      },
+      {
+        "file": ".cursor/utils/task-manager/adapters/linear.md",
+        "hash": "9231199382433979741"
+      },
+      {
+        "file": "docs/knowbase/concepts/meeting-transcription-to-knowledge-base.md",
+        "hash": "17046740196526475049"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "1699853041885806511"
+      },
+      {
+        "file": ".cursor/docs/tools/README.md",
+        "hash": "8765659436173376999"
+      },
+      {
+        "file": ".cursor/agents/development/gitflow-specialist.md",
+        "hash": "2197222667980180016"
+      },
+      {
+        "file": ".cursor/agents/product/product-agent.md",
+        "hash": "12524100957637934126"
+      },
+      {
+        "file": ".cursor/docs/tools/agents.md",
+        "hash": "6237235749743037863"
+      },
+      {
+        "file": ".cursor/utils/task-manager/README.md",
+        "hash": "15892614773588035623"
+      },
+      {
+        "file": "docs/analysis/unleash-alternatives-analysis.md",
+        "hash": "9581671924893600974"
+      },
+      {
+        "file": "docs/business-context/PRODUCT_METRICS.md",
+        "hash": "16527851607667017615"
+      },
+      {
+        "file": ".cursor/agents/compliance/security-information-master.md",
+        "hash": "10670328673793919821"
+      },
+      {
+        "file": "docs/knowbase/concepts/branding-posicionamento-marca.md",
+        "hash": "3444535424137647508"
+      },
+      {
+        "file": ".cursor/docs/c4/c4-documentation-templates.md",
+        "hash": "8745443750899587776"
+      },
+      {
+        "file": ".cursor/agents/development/runflow-specialist.md",
+        "hash": "17274917461589312379"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "1202052270138952530"
+      },
+      {
+        "file": ".cursor/validation/product-task-validation.md",
+        "hash": "108241350593554757"
+      },
+      {
+        "file": ".cursor/commands/git/feature/start.md",
+        "hash": "2038149352889360823"
+      },
+      {
+        "file": ".cursor/commands/product/spec.md",
+        "hash": "9448934252965657161"
+      },
+      {
+        "file": ".cursor/docs/clickup/clickup-description-fix.md",
+        "hash": "7783457365467568262"
+      },
+      {
+        "file": ".cursor/docs/onion/ESPERANTO.md",
+        "hash": "15969105528384882714"
+      },
+      {
+        "file": ".cursor/commands/validate/collab/three-amigos.md",
+        "hash": "10180042709451568845"
+      },
+      {
+        "file": "docs/business-context/VOICE_OF_CUSTOMER.md",
+        "hash": "16485775729776820568"
+      },
+      {
+        "file": ".cursor/utils/date-time-standards.md",
+        "hash": "9635101922183023795"
+      },
+      {
+        "file": "docs/knowbase/concepts/abstraction-patterns-catalog.md",
+        "hash": "15665595295214960307"
+      },
+      {
+        "file": ".cursor/commands/engineer/hotfix.md",
+        "hash": "16583042260598043223"
+      },
+      {
+        "file": ".cursor/docs/tools/cursor.md",
+        "hash": "11184855623120178342"
+      },
+      {
+        "file": ".cursor/commands/common/prompts/git-workflow-patterns.md",
+        "hash": "16065920619911107180"
+      },
+      {
+        "file": ".cursor/agents/compliance/soc2-specialist.md",
+        "hash": "13686464099596488670"
+      },
+      {
+        "file": ".cursor/agents/product/storytelling-business-specialist.md",
+        "hash": "13794274544341498875"
+      },
+      {
+        "file": ".cursor/commands/product/collect.md",
+        "hash": "12009743525059828025"
+      },
+      {
+        "file": "docs/business-context/features/integrations.md",
+        "hash": "11188995792557313654"
+      },
+      {
+        "file": ".cursor/agents/review/corporate-compliance-specialist.md",
+        "hash": "7241774875617535614"
+      },
+      {
+        "file": ".cursor/utils/task-manager/interface.md",
+        "hash": "1715075423465546196"
+      },
+      {
+        "file": "nx.json",
+        "hash": "2087131132507773476"
+      },
+      {
+        "file": ".cursor/docs/reviews/task-manager-docs-review-2025-11-24.md",
+        "hash": "8382249491262364603"
+      },
+      {
+        "file": ".cursor/commands/docs/refine-vision.md",
+        "hash": "7202446067719058131"
+      },
+      {
+        "file": ".cursor/agents/product/story-points-framework-specialist.md",
+        "hash": "3050019519292183994"
+      },
+      {
+        "file": ".cursor/agents/development/clickup-specialist.md",
+        "hash": "4694771178238936914"
+      },
+      {
+        "file": ".cursor/rules/validation-rules.mdc",
+        "hash": "13459125654411896332"
+      },
+      {
+        "file": "docs/onion/cursor-commands-architecture.md",
+        "hash": "402477772905329382"
+      },
+      {
+        "file": ".cursor/agents/deployment/docker-specialist.md",
+        "hash": "2248690304419642963"
+      },
+      {
+        "file": ".cursor/agents/compliance/iso-22301-specialist.md",
+        "hash": "12869358376220233050"
+      },
+      {
+        "file": ".cursor/commands/engineer/work.md",
+        "hash": "13563314666578022468"
+      },
+      {
+        "file": ".cursor/agents/git/branch-test-planner.md",
+        "hash": "4093769905277964423"
+      },
+      {
+        "file": ".cursor/docs/strategies/visual-patterns.md",
+        "hash": "630386385839417747"
+      },
+      {
+        "file": ".cursor/agents/development/nx-migration-specialist.md",
+        "hash": "13882798609296398901"
+      },
+      {
+        "file": ".cursor/docs/templates/README.md",
+        "hash": "5435294354895151791"
+      },
+      {
+        "file": ".cursor/docs/c4/c4-mermaid-patterns.md",
+        "hash": "18104735487207172155"
+      },
+      {
+        "file": ".cursor/agents/meta/metaspec-gate-keeper.md",
+        "hash": "2870932101634245719"
+      },
+      {
+        "file": ".cursor/commands/product/light-arch.md",
+        "hash": "17375375547754628002"
+      },
+      {
+        "file": ".cursor/commands/meta/create-agent.md",
+        "hash": "3723288933769895858"
+      },
+      {
+        "file": ".cursor/docs/onion/getting-started.md",
+        "hash": "3223076362123140403"
+      },
+      {
+        "file": ".cursor/commands/docs/build-compliance-docs.md",
+        "hash": "17893522545896038720"
+      },
+      {
+        "file": ".cursor/commands/docs/reverse-consolidate.md",
+        "hash": "16825982266784551706"
+      },
+      {
+        "file": ".cursor/commands/meta/create-agent-express.md",
+        "hash": "4100041940033567273"
+      },
+      {
+        "file": ".cursor/commands/validate/test-strategy/create.md",
+        "hash": "7822033280522379788"
+      },
+      {
+        "file": "docs/onion/end-to-end-validation-tests.md",
+        "hash": "10625853839137938954"
+      },
+      {
+        "file": ".cursor/commands/product/task-check.md",
+        "hash": "7700032189195434033"
+      },
+      {
+        "file": "docs/technical-context/adr/007-mobile-react-native.md",
+        "hash": "4909100134789876358"
+      },
+      {
+        "file": ".cursor/commands/common/templates/business_context_template.md",
+        "hash": "8028781841077584173"
+      },
+      {
+        "file": ".cursor/docs/c4/c4-templates.md",
+        "hash": "13762453666819308650"
+      },
+      {
+        "file": ".cursor/commands/git/hotfix/start.md",
+        "hash": "14262043694825632980"
+      },
+      {
+        "file": "docs/technical-context/adr/004-multi-tenancy-rls.md",
+        "hash": "10771754488976783222"
+      },
+      {
+        "file": ".nvmrc",
+        "hash": "17282234744361233444"
+      },
+      {
+        "file": ".cursor/commands/engineer/pr.md",
+        "hash": "1893954330876631964"
+      },
+      {
+        "file": "docs/technical-context/adr/002-fastify-backend.md",
+        "hash": "2668993058348415479"
+      },
+      {
+        "file": "pnpm-lock.yaml",
+        "hash": "6174759985074407993"
+      },
+      {
+        "file": ".cursor/agents/git/branch-code-reviewer.md",
+        "hash": "10732200540443376776"
+      },
+      {
+        "file": ".cursor/docs/templates/execution-plan-template.md",
+        "hash": "18318140295105998388"
+      },
+      {
+        "file": ".cursor/commands/common/templates/agent-template.md",
+        "hash": "4381906243418209235"
+      },
+      {
+        "file": ".cursor/commands/engineer/warm-up.md",
+        "hash": "8196274464349353670"
+      },
+      {
+        "file": ".cursor/agents/research/research-agent.md",
+        "hash": "4417154521638389962"
+      },
+      {
+        "file": ".cursor/commands/docs/help.md",
+        "hash": "13778519542851558261"
+      }
+    ],
+    "projectFileMap": {
+      "poc": [
+        {
+          "file": "libs/poc/.gitignore",
+          "hash": "12990309872111536764"
+        },
+        {
+          "file": "libs/poc/.nx/nxw.js",
+          "hash": "11301648124127104610"
+        },
+        {
+          "file": "libs/poc/README.md",
+          "hash": "12600549986785595299"
+        },
+        {
+          "file": "libs/poc/data/agents/marketing.md",
+          "hash": "13166500224406038255"
+        },
+        {
+          "file": "libs/poc/data/agents/onion.md",
+          "hash": "9098161525681748436"
+        },
+        {
+          "file": "libs/poc/data/agents/vendas.md",
+          "hash": "5141058500849589480"
+        },
+        {
+          "file": "libs/poc/data/commands/estrategia-marketing.md",
+          "hash": "17436167170200631128"
+        },
+        {
+          "file": "libs/poc/data/commands/preparar-venda.md",
+          "hash": "6431194279986336433"
+        },
+        {
+          "file": "libs/poc/data/knowbases/marketing-digital.md",
+          "hash": "15952524880828395709"
+        },
+        {
+          "file": "libs/poc/data/knowbases/vendas-negociacao.md",
+          "hash": "9297952876429410127"
+        },
+        {
+          "file": "libs/poc/data/rules/poc-rules.md",
+          "hash": "13215422230768244421"
+        },
+        {
+          "file": "libs/poc/nx",
+          "hash": "8108031838021157773"
+        },
+        {
+          "file": "libs/poc/nx.bat",
+          "hash": "16119536321561623970"
+        },
+        {
+          "file": "libs/poc/nx.json",
+          "hash": "5073876071757159876"
+        },
+        {
+          "file": "libs/poc/project.json",
+          "hash": "7813455784064273510"
+        },
+        {
+          "file": "libs/poc/src/fixtures.ts",
+          "hash": "1537252227449978813"
+        },
+        {
+          "file": "libs/poc/src/index.ts",
+          "hash": "2137293790701900079"
+        },
+        {
+          "file": "libs/poc/src/loader.test.ts",
+          "hash": "11234147794671642038"
+        },
+        {
+          "file": "libs/poc/src/loader.ts",
+          "hash": "5964362075420581085"
+        },
+        {
+          "file": "libs/poc/src/seed.ts",
+          "hash": "12602505181340307614"
+        },
+        {
+          "file": "libs/poc/tsconfig.json",
+          "hash": "13362160069931386854"
+        },
+        {
+          "file": "libs/poc/vitest.config.ts",
+          "hash": "8773607198422687158"
+        }
+      ]
+    }
+  },
+  "externalNodesHash": "17358563118679785111"
+}

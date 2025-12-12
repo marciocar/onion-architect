@@ -1,0 +1,46 @@
+{
+  "name": "poc",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/poc/src",
+  "projectType": "library",
+  "tags": ["scope:poc", "type:library"],
+  "targets": {
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "vitest run",
+        "cwd": "libs/poc"
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/poc"]
+    },
+    "test:watch": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "vitest",
+        "cwd": "libs/poc"
+      }
+    },
+    "test:ui": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "vitest --ui",
+        "cwd": "libs/poc"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "eslint . --ext .ts",
+        "cwd": "libs/poc/src"
+      }
+    },
+    "type-check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc --noEmit",
+        "cwd": "libs/poc"
+      }
+    }
+  }
+}
+

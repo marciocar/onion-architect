@@ -1,0 +1,21 @@
+{
+  "run": {
+    "command": "nx run poc:test",
+    "startTime": "2025-12-12T05:07:28.959Z",
+    "endTime": "2025-12-12T05:07:29.674Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "poc:test",
+      "target": "test",
+      "projectName": "poc",
+      "hash": "1805028269286029821",
+      "startTime": "2025-12-12T05:07:28.970Z",
+      "endTime": "2025-12-12T05:07:29.669Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    }
+  ]
+}

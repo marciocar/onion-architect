@@ -1,0 +1,7 @@
+version: 4.0.0
+contexts:
+  - business
+ides:
+  - cursor
+  - windsurf
+  - claude-code

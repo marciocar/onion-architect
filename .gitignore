@@ -24,6 +24,13 @@ dist/
 build/
 node_modules/
 
+# pnpm
+pnpm-lock.yaml
+
+# TypeScript
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
 # Arquivos do sistema
 *.swp
 *.swo

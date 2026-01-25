@@ -1,4 +1,4 @@
-# @onion/cli
+# @onion-architect-ai/cli
 
 CLI para Sistema Onion - Multi-Context Development Orchestrator
 
@@ -6,7 +6,10 @@ CLI para Sistema Onion - Multi-Context Development Orchestrator
 
 ```bash
 # Global
-npm install -g @onion/cli
+npm install -g @onion-architect-ai/cli
+
+# Local (projeto)
+npm install @onion-architect-ai/cli
 
 # Local (development)
 cd packages/onion-cli

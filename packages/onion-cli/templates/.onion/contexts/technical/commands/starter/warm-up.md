@@ -1,0 +1,173 @@
+---
+name: warm-up
+description: |
+  Preparação de contexto técnico e de engenharia.
+  Foca em arquitetura, padrões de código, estrutura do projeto, comandos de desenvolvimento e frameworks técnicos.
+model: sonnet
+category: engineer
+tags: [warmup, context, engineering, technical]
+version: "4.0.0"
+updated: "2025-12-20"
+level: starter
+context: technical
+---
+
+# 🔥 Warm-up de Engenharia
+
+Preparação específica para trabalho técnico e de desenvolvimento.
+
+## 🎯 Objetivo
+
+Estabelecer contexto focado em:
+- Arquitetura técnica do projeto
+- Padrões de código e convenções
+- Estrutura de código e organização
+- Comandos e workflows de desenvolvimento
+- Frameworks técnicos e ferramentas
+- Sistema de testes e validação
+
+## 📋 Checklist de Preparação
+
+### 1. Contexto Geral (Base)
+- ✅ Revisar `README.md` para visão geral do Sistema Onion
+- ✅ Entender estrutura de documentação em `docs/`
+
+### 2. Meta Especificações Técnicas
+- ✅ Revisar `docs/meta-specs/index.md`
+- ✅ Focar em:
+  - `architecture.md` (quando disponível) - Padrões arquiteturais
+  - `code-standards.md` (quando disponível) - Padrões de código
+  - `agents.md` (quando disponível) - Padrões para agentes
+  - `commands.md` (quando disponível) - Padrões para comandos
+- ✅ Entender hierarquia de especificações para decisões técnicas
+
+### 3. Documentação Técnica
+- ✅ Revisar `docs/onion/commands-guide.md` - Seção "Comandos de Engenharia"
+- ✅ Revisar `docs/onion/engineering-flows.md` - Fluxos de desenvolvimento
+- ✅ Revisar `docs/onion/testing-validation-system.md` - Sistema de testes
+- ✅ Mapear comandos de engenharia:
+  - `/engineer/start` - Iniciar desenvolvimento (valida story points)
+  - `/engineer/work` - Trabalhar em feature
+  - `/engineer/plan` - Planejar implementação
+  - `/engineer/pre-pr` - Preparar Pull Request
+  - `/engineer/pr` - Criar Pull Request
+  - `/engineer/docs` - Documentar código
+  - `/engineer/warm-up` - Este comando
+
+### 4. Estrutura do Projeto
+- ✅ Mapear estrutura de diretórios do código
+- ✅ Entender organização de módulos/pacotes
+- ✅ Identificar tecnologias principais (linguagens, frameworks)
+- ✅ Localizar arquivos de configuração importantes
+
+### 5. Padrões de Código
+- ✅ Revisar convenções de nomenclatura
+- ✅ Entender estilo de código esperado
+- ✅ Conhecer ferramentas de linting/formatting
+- ✅ Verificar arquivos de configuração (.eslintrc, .prettierrc, etc)
+
+### 6. Knowledge Bases Técnicas
+- ✅ Revisar `docs/knowbase/concepts/spec-as-code-strategy.md`
+- ✅ Revisar `docs/knowbase/concepts/ai-agent-design-patterns.md`
+- ✅ Revisar `docs/knowbase/concepts/abstraction-patterns-catalog.md`
+- ✅ Revisar `docs/knowbase/frameworks/framework_testes.md`
+- ✅ Revisar `docs/knowbase/concepts/context-window-optimization.md`
+
+### 7. Agentes de Desenvolvimento
+- ✅ Conhecer agentes especializados:
+  - `@react-developer` - Desenvolvimento React
+  - `@python-developer` - Desenvolvimento Python
+  - `@nodejs-specialist` - Backend Node.js
+  - `@nx-monorepo-specialist` - Monorepos NX
+  - `@c4-architecture-specialist` - Arquitetura C4
+  - `@test-engineer` - Testes e QA
+  - `@code-reviewer` - Code review
+
+### 8. Sistema de Testes
+- ✅ Revisar `docs/onion/testing-validation-system.md`
+- ✅ Entender comandos de teste:
+  - `/test/unit` - Testes unitários (White-box)
+  - `/test/integration` - Testes de integração (Grey-box)
+  - `/test/e2e` - Testes end-to-end (Black-box)
+- ✅ Conhecer frameworks de teste utilizados
+
+### 9. Git e Versionamento
+- ✅ Revisar comandos Git disponíveis:
+  - `/git/feature/start` - Criar branch de feature
+  - `/git/sync` - Sincronizar após merge
+- ✅ Entender workflow Git do projeto
+- ✅ Conhecer convenções de branching
+
+### 10. Validação de Story Points
+- ✅ Entender que `/engineer/start` valida estimativas
+- ✅ Conhecer processo de validação antes de iniciar desenvolvimento
+- ✅ Saber como lidar com tasks sem estimativas
+
+## 🔍 Contexto Específico de Engenharia
+
+### Documentação Essencial
+- `docs/onion/engineering-flows.md` - Fluxos de desenvolvimento
+- `docs/onion/testing-validation-system.md` - Sistema de testes
+- `docs/onion/commands-guide.md` - Comandos de engenharia
+- `docs/knowbase/frameworks/framework_testes.md` - Framework de testes
+
+### Workflows de Desenvolvimento
+1. **Iniciar**: `/engineer/start` → Valida story points, cria branch, sessão
+2. **Trabalhar**: `/engineer/work` → Loop de desenvolvimento
+3. **Planejar**: `/engineer/plan` → Planejar implementação detalhada
+4. **Pre-PR**: `/engineer/pre-pr` → Preparar Pull Request
+5. **PR**: `/engineer/pr` → Criar Pull Request (testes, build, PR)
+6. **Sync**: `/git/sync` → Sincronizar após merge
+
+### Estrutura de Sessões
+- ✅ Entender `.cursor/sessions/<feature>/` para contexto de trabalho
+- ✅ Conhecer formato de arquivos de sessão
+
+## 💡 Quando Usar Este Warm-up
+
+- ✅ Início de desenvolvimento de feature
+- ✅ Retorno a trabalho técnico após período ausente
+- ✅ Mudança de contexto técnico (nova tecnologia/framework)
+- ✅ Necessidade de entender arquitetura do projeto
+- ✅ Preparação para code review ou refatoração
+
+## 🔗 Integração com Produto
+
+- Tasks vêm de `/product/task` com story points
+- Especificações vêm de `/product/spec`
+- Validação de estimativas antes de iniciar
+- Sincronização com Task Manager durante desenvolvimento
+
+## ⚠️ Notas
+
+- Foco em contexto técnico e de código
+- Mantenha conhecimento de padrões e convenções no contexto
+- Use agentes especializados para tecnologias específicas
+- Sempre valide story points antes de iniciar (`/engineer/start`)
+- Mantenha código sincronizado com Task Manager durante desenvolvimento
+
+---
+
+## 🚀 Próximos Passos
+
+Agora que você preparou o contexto técnico:
+
+1. **Planejar nova feature**:
+   ```bash
+   /technical/plan "feature-name"
+   ```
+   Cria plano de desenvolvimento estruturado.
+
+2. **Ou retomar trabalho existente**:
+   ```bash
+   /technical/work "task-id"
+   ```
+   Continua desenvolvimento de feature em progresso.
+
+3. **Resolver conflitos se necessário**:
+   ```bash
+   /technical/sync
+   ```
+   Sincroniza com remote antes de começar novo trabalho.
+
+💡 **Dica**: Warm-up carrega contexto sobre stack, arquitetura e padrões do projeto - essencial após pausas longas.

@@ -1,0 +1,1 @@
+../../../.onion/contexts/business/commands/intermediate/check.md

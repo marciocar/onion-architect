@@ -2,7 +2,7 @@
  * Constantes do Sistema Onion
  */
 
-export const ONION_VERSION = '4.1.0-beta.1';
+export const ONION_VERSION = '4.1.0-beta.2';
 export const CONFIG_VERSION = '1.0.0';
 
 export const ONION_ROOT = '.onion';

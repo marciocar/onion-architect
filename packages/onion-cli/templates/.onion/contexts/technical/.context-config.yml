@@ -1,0 +1,64 @@
+# Technical Context Configuration
+# Onion v4.0 - Multi-Context Development Orchestrator
+
+context:
+  name: technical
+  description: Development, Testing, Git, Documentation workflows
+  version: "4.0.0"
+  created: "2025-12-20"
+
+commands:
+  prefix: /technical
+  levels:
+    starter: 10      # 80% dos casos de uso
+    intermediate: 15 # 15% dos casos de uso
+    advanced: 7      # 5% dos casos de uso
+
+agents:
+  - react-developer
+  - nodejs-specialist
+  - postgres-specialist
+  - zen-engine-specialist
+  - nx-monorepo-specialist
+  - nx-migration-specialist
+  - gitflow-specialist
+  - cursor-specialist
+  - c4-architecture-specialist
+  - c4-documentation-specialist
+  - mermaid-specialist
+  - system-doc-orchestrator
+  - docs-reverse-engineer
+  - linux-security-specialist
+  - runflow-specialist
+  - test-engineer
+  - test-planner
+  - test-agent
+  - code-reviewer
+  - branch-code-reviewer
+  - branch-doc-writer
+  - branch-metaspec-checker
+  - branch-test-planner
+
+integrations:
+  version_control:
+    provider: git
+    strategy: gitflow
+  testing:
+    unit: jest
+    integration: supertest
+    e2e: playwright
+  documentation:
+    format: c4-model
+    generator: mermaid
+  
+onboarding:
+  estimated_time: 30 minutes
+  required_reading:
+    - .onion/contexts/technical/README.md
+    - docs/meta-specs/
+  starter_commands:
+    - /technical/work "task-id"
+    - /technical/plan "feature"
+    - /technical/pr
+    - /technical/sync
+    - /technical/docs

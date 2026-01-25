@@ -29,13 +29,15 @@ export async function init(options: InitOptions = {}): Promise<void> {
       process.exit(1);
     }
 
-    // 2. Encontrar a raiz do onion-v4
-    const onionRoot = path.resolve(import.meta.dirname, '../../../..');
-    const sourceOnion = path.join(onionRoot, '.onion');
+    // 2. Encontrar templates bundled no pacote
+    // Nota: tsup bundla tudo em dist/cli.js, então import.meta.dirname = dist/
+    const templatesRoot = path.resolve(import.meta.dirname, '../templates');
+    const sourceOnion = path.join(templatesRoot, '.onion');
 
     if (!fs.existsSync(sourceOnion)) {
-      console.log(chalk.red('❌ Could not find Onion source structure'));
+      console.log(chalk.red('❌ Could not find Onion templates'));
       console.log(chalk.gray(`Expected: ${sourceOnion}`));
+      console.log(chalk.gray('This may indicate a corrupted installation. Try reinstalling the CLI.'));
       process.exit(1);
     }
 
@@ -55,7 +57,7 @@ export async function init(options: InitOptions = {}): Promise<void> {
     fs.ensureDirSync(cursorDir);
 
     // Copiar estrutura de comandos
-    const sourceCursorCommands = path.join(onionRoot, '.cursor/commands');
+    const sourceCursorCommands = path.join(templatesRoot, '.cursor/commands');
     if (fs.existsSync(sourceCursorCommands)) {
       fs.copySync(sourceCursorCommands, path.join(cursorDir, 'commands'), {
         dereference: true,
@@ -63,7 +65,7 @@ export async function init(options: InitOptions = {}): Promise<void> {
     }
 
     // Copiar agentes
-    const sourceCursorAgents = path.join(onionRoot, '.cursor/agents');
+    const sourceCursorAgents = path.join(templatesRoot, '.cursor/agents');
     if (fs.existsSync(sourceCursorAgents)) {
       fs.copySync(sourceCursorAgents, path.join(cursorDir, 'agents'), {
         dereference: true,
@@ -71,7 +73,7 @@ export async function init(options: InitOptions = {}): Promise<void> {
     }
 
     // Copiar regras
-    const sourceCursorRules = path.join(onionRoot, '.cursor/rules');
+    const sourceCursorRules = path.join(templatesRoot, '.cursor/rules');
     if (fs.existsSync(sourceCursorRules)) {
       fs.copySync(sourceCursorRules, path.join(cursorDir, 'rules'), {
         dereference: true,

@@ -1,0 +1,52 @@
+# Business Context Configuration
+# Onion v4.0 - Multi-Context Development Orchestrator
+
+context:
+  name: business
+  description: Product, Strategy, Planning workflows
+  version: "4.0.0"
+  created: "2025-12-20"
+
+commands:
+  prefix: /business
+  levels:
+    starter: 5       # 80% dos casos de uso
+    intermediate: 10 # 15% dos casos de uso
+    advanced: 5      # 5% dos casos de uso
+
+agents:
+  - product-agent
+  - story-points-specialist
+  - extract-meeting-specialist
+  - meeting-consolidator
+  - presentation-orchestrator
+  - branding-specialist
+  - pain-price-specialist
+  - storytelling-specialist
+  - clickup-specialist
+  - whisper-specialist
+  - task-specialist
+  - gamma-specialist
+
+integrations:
+  task_manager:
+    provider: clickup  # ou asana, linear, none
+    config_key: CLICKUP_API_TOKEN
+  transcription:
+    provider: whisper-local
+    config_key: null
+  presentation:
+    provider: gamma
+    config_key: GAMMA_API_TOKEN
+  
+onboarding:
+  estimated_time: 30 minutes
+  required_reading:
+    - .onion/contexts/business/README.md
+    - docs/knowbase/frameworks/framework_story_points.md
+  starter_commands:
+    - /business/spec "feature-name"
+    - /business/task "task-description"
+    - /business/estimate "feature"
+    - /business/refine "spec.md"
+    - /business/warm-up

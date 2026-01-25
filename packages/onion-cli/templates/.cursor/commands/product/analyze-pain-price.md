@@ -1,0 +1,1 @@
+../../../.onion/contexts/business/commands/advanced/analyze-pain-price.md

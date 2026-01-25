@@ -1,0 +1,8 @@
+{
+  "onion": {
+    "enabled": true,
+    "root": ".onion",
+    "loader": ".onion/ide/cursor/onion-loader.js",
+    "version": "4.0.0-beta.1"
+  }
+}

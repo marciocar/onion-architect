@@ -1,0 +1,63 @@
+{
+  "onion": {
+    "version": "4.0.0-beta.1",
+    "generated": "2026-01-01T16:34:05.093Z",
+    "contexts": [
+      "business"
+    ],
+    "commands": [
+      {
+        "name": "help",
+        "path": ".onion/core/commands/help.md",
+        "context": "core",
+        "level": "core",
+        "description": "Onion command: core/help (core)"
+      },
+      {
+        "name": "business/spec",
+        "path": ".onion/contexts/business/commands/starter/spec.md",
+        "context": "business",
+        "level": "starter",
+        "description": "Onion command: business/spec (starter)"
+      }
+    ],
+    "agents": [
+      {
+        "name": "business/product-agent",
+        "path": ".onion/contexts/business/agents/product-agent.md",
+        "context": "business",
+        "description": "Onion agent: business/product-agent"
+      }
+    ]
+  },
+  "commands": [
+    {
+      "name": "help",
+      "path": ".onion/core/commands/help.md",
+      "metadata": {
+        "context": "core",
+        "level": "core",
+        "description": "Onion command: core/help (core)"
+      }
+    },
+    {
+      "name": "business/spec",
+      "path": ".onion/contexts/business/commands/starter/spec.md",
+      "metadata": {
+        "context": "business",
+        "level": "starter",
+        "description": "Onion command: business/spec (starter)"
+      }
+    }
+  ],
+  "agents": [
+    {
+      "name": "business/product-agent",
+      "path": ".onion/contexts/business/agents/product-agent.md",
+      "metadata": {
+        "context": "business",
+        "description": "Onion agent: business/product-agent"
+      }
+    }
+  ]
+}

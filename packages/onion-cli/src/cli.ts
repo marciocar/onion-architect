@@ -33,7 +33,8 @@ program
   .command('init')
   .description('Initialize new Onion project')
   .option('-d, --debug', 'Enable debug mode')
-  .action(async (options: { debug?: boolean }) => {
+  .option('-f, --force', 'Force reinitialize, overwriting existing files')
+  .action(async (options: { debug?: boolean; force?: boolean }) => {
     await init(options);
   });
 

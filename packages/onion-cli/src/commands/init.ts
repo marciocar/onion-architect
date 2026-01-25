@@ -9,6 +9,7 @@ import chalk from 'chalk';
 
 export interface InitOptions {
   debug?: boolean;
+  force?: boolean;
 }
 
 /**
@@ -23,10 +24,25 @@ export async function init(options: InitOptions = {}): Promise<void> {
     console.log('');
 
     // 1. Verificar se já existe
-    if (fs.existsSync(path.join(projectRoot, '.onion'))) {
-      console.log(chalk.yellow('⚠️  .onion/ already exists!'));
-      console.log(chalk.gray('Use "onion migrate" to upgrade from v3'));
-      process.exit(1);
+    const onionExists = fs.existsSync(path.join(projectRoot, '.onion'));
+    const cursorExists = fs.existsSync(path.join(projectRoot, '.cursor'));
+    
+    if (onionExists || cursorExists) {
+      if (!options.force) {
+        console.log(chalk.yellow('⚠️  .onion/ or .cursor/ already exists!'));
+        console.log(chalk.gray('Use "onion init --force" to overwrite'));
+        console.log(chalk.gray('Or use "onion migrate" to upgrade from v3'));
+        process.exit(1);
+      }
+      
+      // Force mode: remove existing folders
+      console.log(chalk.yellow('⚠️  Force mode: removing existing folders...'));
+      if (onionExists) {
+        fs.removeSync(path.join(projectRoot, '.onion'));
+      }
+      if (cursorExists) {
+        fs.removeSync(path.join(projectRoot, '.cursor'));
+      }
     }
 
     // 2. Encontrar templates bundled no pacote
@@ -56,26 +72,10 @@ export async function init(options: InitOptions = {}): Promise<void> {
     const cursorDir = path.join(projectRoot, '.cursor');
     fs.ensureDirSync(cursorDir);
 
-    // Copiar estrutura de comandos
-    const sourceCursorCommands = path.join(templatesRoot, '.cursor/commands');
-    if (fs.existsSync(sourceCursorCommands)) {
-      fs.copySync(sourceCursorCommands, path.join(cursorDir, 'commands'), {
-        dereference: true,
-      });
-    }
-
-    // Copiar agentes
-    const sourceCursorAgents = path.join(templatesRoot, '.cursor/agents');
-    if (fs.existsSync(sourceCursorAgents)) {
-      fs.copySync(sourceCursorAgents, path.join(cursorDir, 'agents'), {
-        dereference: true,
-      });
-    }
-
-    // Copiar regras
-    const sourceCursorRules = path.join(templatesRoot, '.cursor/rules');
-    if (fs.existsSync(sourceCursorRules)) {
-      fs.copySync(sourceCursorRules, path.join(cursorDir, 'rules'), {
+    // Copiar toda a estrutura .cursor/ do template
+    const sourceCursor = path.join(templatesRoot, '.cursor');
+    if (fs.existsSync(sourceCursor)) {
+      fs.copySync(sourceCursor, cursorDir, {
         dereference: true,
       });
     }

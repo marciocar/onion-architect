@@ -8,6 +8,9 @@
 import { Command } from 'commander';
 import chalk from 'chalk';
 import { init } from './commands/init.js';
+import { add } from './commands/add.js';
+import { migrate } from './commands/migrate.js';
+import { validate } from './commands/validate.js';
 import { ONION_VERSION } from './constants.js';
 
 // Criar instância do programa
@@ -39,8 +42,8 @@ program
   .command('add')
   .description('Add context or IDE to existing project')
   .option('-d, --debug', 'Enable debug mode')
-  .action(() => {
-    console.log(chalk.yellow('⚠️  Command implementation in progress'));
+  .action(async (options: { debug?: boolean }) => {
+    await add(options);
   });
 
 // Comando: migrate
@@ -49,16 +52,17 @@ program
   .description('Migrate from Onion v3 to v4')
   .option('--no-backup', 'Skip backup creation')
   .option('-d, --debug', 'Enable debug mode')
-  .action(() => {
-    console.log(chalk.yellow('⚠️  Command implementation in progress'));
+  .action(async (options: { debug?: boolean; noBackup?: boolean }) => {
+    await migrate(options);
   });
 
 // Comando: validate
 program
   .command('validate')
-  .description('Validate Onion structure (coming soon)')
-  .action(() => {
-    console.log(chalk.yellow('⚠️  Command coming soon in next release!'));
+  .description('Validate Onion structure')
+  .option('-d, --debug', 'Enable debug mode')
+  .action(async (options: { debug?: boolean }) => {
+    await validate(options);
   });
 
 // Parse arguments

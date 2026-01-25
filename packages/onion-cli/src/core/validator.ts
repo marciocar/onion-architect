@@ -1,29 +1,25 @@
 /**
  * @fileoverview Core Validator - Validações reutilizáveis sem dependências
  * @module core/validator
- * 
+ *
  * Princípios:
  * - ZERO dependências externas
  * - Funções puras (sem side effects)
  * - Validações consistentes em todo CLI
  */
 
-import { CONSTANTS } from '../constants.js';
+import { SUPPORTED_IDES, OPTIONAL_INTEGRATIONS } from '../constants.js';
 
 /**
  * Valida nome de contexto
- * 
+ *
  * Regras:
  * - Lowercase
  * - Alfanumérico + hífens
  * - 3-20 caracteres
  * - Não pode ser palavra reservada
- * 
- * @param {string} name - Nome do contexto
- * @returns {boolean} true se válido
- * @throws {Error} se inválido com mensagem descritiva
  */
-export function validateContextName(name) {
+export function validateContextName(name: string): boolean {
   if (!name || typeof name !== 'string') {
     throw new Error('Nome do contexto é obrigatório');
   }
@@ -58,21 +54,17 @@ export function validateContextName(name) {
 
 /**
  * Valida nome de IDE
- * 
- * @param {string} ide - Nome do IDE
- * @returns {boolean} true se válido
- * @throws {Error} se inválido
  */
-export function validateIDEName(ide) {
+export function validateIDEName(ide: string): boolean {
   if (!ide || typeof ide !== 'string') {
     throw new Error('Nome do IDE é obrigatório');
   }
 
-  const supported = CONSTANTS.SUPPORTED_IDES || ['cursor', 'windsurf', 'claude'];
-  
-  if (!supported.includes(ide.toLowerCase())) {
+  const supportedIds = SUPPORTED_IDES.map((i) => i.id);
+
+  if (!supportedIds.includes(ide.toLowerCase())) {
     throw new Error(
-      `IDE "${ide}" não é suportado. IDEs disponíveis: ${supported.join(', ')}`
+      `IDE "${ide}" não é suportado. IDEs disponíveis: ${supportedIds.join(', ')}`
     );
   }
 
@@ -81,23 +73,13 @@ export function validateIDEName(ide) {
 
 /**
  * Valida nome de integração
- * 
- * @param {string} integration - Nome da integração
- * @returns {boolean} true se válido
- * @throws {Error} se inválido
  */
-export function validateIntegrationName(integration) {
+export function validateIntegrationName(integration: string): boolean {
   if (!integration || typeof integration !== 'string') {
     throw new Error('Nome da integração é obrigatório');
   }
 
-  const supported = CONSTANTS.OPTIONAL_INTEGRATIONS || [
-    'clickup',
-    'asana',
-    'linear',
-    'github',
-    'gitlab'
-  ];
+  const supported = OPTIONAL_INTEGRATIONS.taskManager.map((i) => i.id);
 
   if (!supported.includes(integration.toLowerCase())) {
     throw new Error(
@@ -108,79 +90,89 @@ export function validateIntegrationName(integration) {
   return true;
 }
 
+export interface ProjectStructure {
+  root: string;
+  version: 'v3' | 'v4';
+  [key: string]: unknown;
+}
+
 /**
  * Valida estrutura mínima de projeto Onion
- * 
- * @param {Object} structure - Estrutura do projeto
- * @returns {boolean} true se válido
- * @throws {Error} se inválido
  */
-export function validateProjectStructure(structure) {
+export function validateProjectStructure(structure: unknown): structure is ProjectStructure {
   if (!structure || typeof structure !== 'object') {
     throw new Error('Estrutura do projeto inválida');
   }
 
+  const struct = structure as Record<string, unknown>;
+
   // Obrigatórios
   const required = ['root', 'version'];
   for (const field of required) {
-    if (!structure[field]) {
+    if (!struct[field]) {
       throw new Error(`Campo obrigatório ausente: ${field}`);
     }
   }
 
   // Versão válida
-  if (!['v3', 'v4'].includes(structure.version)) {
-    throw new Error(`Versão inválida: ${structure.version}`);
+  if (!['v3', 'v4'].includes(struct.version as string)) {
+    throw new Error(`Versão inválida: ${struct.version}`);
   }
 
   return true;
 }
 
+export interface OnionConfig {
+  version: string;
+  contexts: string[];
+  ides: string[];
+  integrations?: Record<string, unknown>;
+  [key: string]: unknown;
+}
+
 /**
  * Valida configuração .onion-config.yml
- * 
- * @param {Object} config - Objeto de configuração
- * @returns {boolean} true se válido
- * @throws {Error} se inválido
  */
-export function validateConfig(config) {
+export function validateConfig(config: unknown): config is OnionConfig {
   if (!config || typeof config !== 'object') {
     throw new Error('Configuração inválida');
   }
 
+  const cfg = config as Record<string, unknown>;
+
   // Campos obrigatórios
   const required = ['version', 'contexts', 'ides'];
   for (const field of required) {
-    if (!config[field]) {
+    if (!cfg[field]) {
       throw new Error(`Campo obrigatório ausente no config: ${field}`);
     }
   }
 
   // Contextos deve ser array
-  if (!Array.isArray(config.contexts)) {
+  if (!Array.isArray(cfg.contexts)) {
     throw new Error('Campo "contexts" deve ser um array');
   }
 
   // IDEs deve ser array
-  if (!Array.isArray(config.ides)) {
+  if (!Array.isArray(cfg.ides)) {
     throw new Error('Campo "ides" deve ser um array');
   }
 
   // Validar cada contexto
-  for (const ctx of config.contexts) {
+  for (const ctx of cfg.contexts as string[]) {
     try {
       validateContextName(ctx);
     } catch (err) {
-      throw new Error(`Contexto inválido "${ctx}": ${err.message}`);
+      throw new Error(`Contexto inválido "${ctx}": ${(err as Error).message}`);
     }
   }
 
   // Validar cada IDE
-  for (const ide of config.ides) {
+  for (const ide of cfg.ides as string[]) {
     try {
       validateIDEName(ide);
     } catch (err) {
-      throw new Error(`IDE inválido "${ide}": ${err.message}`);
+      throw new Error(`IDE inválido "${ide}": ${(err as Error).message}`);
     }
   }
 
@@ -189,12 +181,8 @@ export function validateConfig(config) {
 
 /**
  * Valida path de arquivo/diretório
- * 
- * @param {string} filePath - Path a validar
- * @returns {boolean} true se válido
- * @throws {Error} se inválido
  */
-export function validatePath(filePath) {
+export function validatePath(filePath: string): boolean {
   if (!filePath || typeof filePath !== 'string') {
     throw new Error('Path é obrigatório');
   }
@@ -217,32 +205,22 @@ export function validatePath(filePath) {
 
 /**
  * Valida se valor é booleano
- * 
- * @param {*} value - Valor a validar
- * @returns {boolean} true se é boolean
  */
-export function isBoolean(value) {
+export function isBoolean(value: unknown): value is boolean {
   return typeof value === 'boolean';
 }
 
 /**
  * Valida se valor é string não-vazia
- * 
- * @param {*} value - Valor a validar
- * @returns {boolean} true se é string não-vazia
  */
-export function isNonEmptyString(value) {
+export function isNonEmptyString(value: unknown): value is string {
   return typeof value === 'string' && value.trim().length > 0;
 }
 
 /**
  * Valida versão semântica
- * 
- * @param {string} version - Versão a validar (e.g., "4.0.0")
- * @returns {boolean} true se válido
- * @throws {Error} se inválido
  */
-export function validateSemver(version) {
+export function validateSemver(version: string): boolean {
   if (!version || typeof version !== 'string') {
     throw new Error('Versão é obrigatória');
   }
@@ -254,4 +232,3 @@ export function validateSemver(version) {
 
   return true;
 }
-

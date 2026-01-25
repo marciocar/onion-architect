@@ -1,7 +1,7 @@
 /**
  * @fileoverview Core Config - CRUD para .onion-config.yml
  * @module core/config
- * 
+ *
  * Princípios:
  * - CRUD completo (Create, Read, Update, Delete)
  * - Merge inteligente em updates
@@ -10,20 +10,16 @@
  */
 
 import fs from 'fs-extra';
-import path from 'path';
+import path from 'node:path';
 import yaml from 'yaml';
-import { validateConfig } from './validator.js';
+import { validateConfig, type OnionConfig } from './validator.js';
 
 const CONFIG_FILENAME = '.onion-config.yml';
 
 /**
  * Lê configuração .onion-config.yml
- * 
- * @param {string} projectRoot - Caminho raiz do projeto
- * @returns {Promise<Object>} Configuração parseada
- * @throws {Error} se arquivo não existe ou é inválido
  */
-export async function readConfig(projectRoot) {
+export async function readConfig(projectRoot: string): Promise<OnionConfig> {
   const configPath = path.join(projectRoot, CONFIG_FILENAME);
 
   if (!(await fs.pathExists(configPath))) {
@@ -32,29 +28,24 @@ export async function readConfig(projectRoot) {
 
   try {
     const content = await fs.readFile(configPath, 'utf8');
-    const config = yaml.parse(content);
+    const config = yaml.parse(content) as unknown;
 
     // Validar estrutura
     validateConfig(config);
 
-    return config;
+    return config as OnionConfig;
   } catch (error) {
-    if (error.message.includes('não encontrado')) {
+    if ((error as Error).message.includes('não encontrado')) {
       throw error;
     }
-    throw new Error(`Erro ao ler ${CONFIG_FILENAME}: ${error.message}`);
+    throw new Error(`Erro ao ler ${CONFIG_FILENAME}: ${(error as Error).message}`);
   }
 }
 
 /**
  * Cria novo arquivo .onion-config.yml
- * 
- * @param {string} projectRoot - Caminho raiz do projeto
- * @param {Object} data - Dados iniciais da configuração
- * @returns {Promise<void>}
- * @throws {Error} se arquivo já existe ou dados inválidos
  */
-export async function createConfig(projectRoot, data) {
+export async function createConfig(projectRoot: string, data: OnionConfig): Promise<void> {
   const configPath = path.join(projectRoot, CONFIG_FILENAME);
 
   // Verificar se já existe
@@ -69,35 +60,36 @@ export async function createConfig(projectRoot, data) {
     // Gerar YAML
     const yamlContent = yaml.stringify(data, {
       indent: 2,
-      lineWidth: 0 // Sem quebra de linha
+      lineWidth: 0, // Sem quebra de linha
     });
 
     // Escrever arquivo
     await fs.writeFile(configPath, yamlContent, 'utf8');
   } catch (error) {
-    throw new Error(`Erro ao criar ${CONFIG_FILENAME}: ${error.message}`);
+    throw new Error(`Erro ao criar ${CONFIG_FILENAME}: ${(error as Error).message}`);
   }
 }
 
 /**
  * Atualiza configuração existente (merge)
- * 
+ *
  * Faz merge inteligente:
  * - Arrays: concatena e remove duplicatas
  * - Objetos: merge profundo
  * - Primitivos: substitui
- * 
- * @param {string} projectRoot - Caminho raiz do projeto
- * @param {Object} updates - Atualizações a aplicar
- * @returns {Promise<Object>} Configuração atualizada
- * @throws {Error} se arquivo não existe ou update é inválido
  */
-export async function updateConfig(projectRoot, updates) {
+export async function updateConfig(
+  projectRoot: string,
+  updates: Partial<OnionConfig>
+): Promise<OnionConfig> {
   // Ler config atual
   const current = await readConfig(projectRoot);
 
   // Merge inteligente
-  const merged = deepMerge(current, updates);
+  const merged = deepMerge(
+    current as unknown as Record<string, DeepMergeValue>,
+    updates as unknown as Record<string, DeepMergeValue>
+  ) as unknown as OnionConfig;
 
   // Validar resultado
   validateConfig(merged);
@@ -106,7 +98,7 @@ export async function updateConfig(projectRoot, updates) {
   const configPath = path.join(projectRoot, CONFIG_FILENAME);
   const yamlContent = yaml.stringify(merged, {
     indent: 2,
-    lineWidth: 0
+    lineWidth: 0,
   });
 
   await fs.writeFile(configPath, yamlContent, 'utf8');
@@ -116,11 +108,8 @@ export async function updateConfig(projectRoot, updates) {
 
 /**
  * Remove configuração
- * 
- * @param {string} projectRoot - Caminho raiz do projeto
- * @returns {Promise<void>}
  */
-export async function deleteConfig(projectRoot) {
+export async function deleteConfig(projectRoot: string): Promise<void> {
   const configPath = path.join(projectRoot, CONFIG_FILENAME);
 
   if (await fs.pathExists(configPath)) {
@@ -130,33 +119,23 @@ export async function deleteConfig(projectRoot) {
 
 /**
  * Verifica se configuração existe
- * 
- * @param {string} projectRoot - Caminho raiz do projeto
- * @returns {Promise<boolean>} true se existe
  */
-export async function configExists(projectRoot) {
+export async function configExists(projectRoot: string): Promise<boolean> {
   const configPath = path.join(projectRoot, CONFIG_FILENAME);
   return await fs.pathExists(configPath);
 }
 
 /**
  * Obtém caminho da configuração
- * 
- * @param {string} projectRoot - Caminho raiz do projeto
- * @returns {string} Caminho completo do config
  */
-export function getConfigPath(projectRoot) {
+export function getConfigPath(projectRoot: string): string {
   return path.join(projectRoot, CONFIG_FILENAME);
 }
 
 /**
  * Adiciona contexto à configuração
- * 
- * @param {string} projectRoot - Caminho raiz do projeto
- * @param {string} contextName - Nome do contexto
- * @returns {Promise<Object>} Configuração atualizada
  */
-export async function addContext(projectRoot, contextName) {
+export async function addContext(projectRoot: string, contextName: string): Promise<OnionConfig> {
   const config = await readConfig(projectRoot);
 
   // Verificar se já existe
@@ -166,18 +145,14 @@ export async function addContext(projectRoot, contextName) {
 
   // Adicionar
   return await updateConfig(projectRoot, {
-    contexts: [...config.contexts, contextName]
+    contexts: [...config.contexts, contextName],
   });
 }
 
 /**
  * Remove contexto da configuração
- * 
- * @param {string} projectRoot - Caminho raiz do projeto
- * @param {string} contextName - Nome do contexto
- * @returns {Promise<Object>} Configuração atualizada
  */
-export async function removeContext(projectRoot, contextName) {
+export async function removeContext(projectRoot: string, contextName: string): Promise<OnionConfig> {
   const config = await readConfig(projectRoot);
 
   // Verificar se existe
@@ -187,18 +162,14 @@ export async function removeContext(projectRoot, contextName) {
 
   // Remover
   return await updateConfig(projectRoot, {
-    contexts: config.contexts.filter(c => c !== contextName)
+    contexts: config.contexts.filter((c) => c !== contextName),
   });
 }
 
 /**
  * Adiciona IDE à configuração
- * 
- * @param {string} projectRoot - Caminho raiz do projeto
- * @param {string} ideName - Nome do IDE
- * @returns {Promise<Object>} Configuração atualizada
  */
-export async function addIDE(projectRoot, ideName) {
+export async function addIDE(projectRoot: string, ideName: string): Promise<OnionConfig> {
   const config = await readConfig(projectRoot);
 
   // Verificar se já existe
@@ -208,18 +179,14 @@ export async function addIDE(projectRoot, ideName) {
 
   // Adicionar
   return await updateConfig(projectRoot, {
-    ides: [...config.ides, ideName]
+    ides: [...config.ides, ideName],
   });
 }
 
 /**
  * Remove IDE da configuração
- * 
- * @param {string} projectRoot - Caminho raiz do projeto
- * @param {string} ideName - Nome do IDE
- * @returns {Promise<Object>} Configuração atualizada
  */
-export async function removeIDE(projectRoot, ideName) {
+export async function removeIDE(projectRoot: string, ideName: string): Promise<OnionConfig> {
   const config = await readConfig(projectRoot);
 
   // Verificar se existe
@@ -229,29 +196,29 @@ export async function removeIDE(projectRoot, ideName) {
 
   // Remover
   return await updateConfig(projectRoot, {
-    ides: config.ides.filter(i => i !== ideName)
+    ides: config.ides.filter((i) => i !== ideName),
   });
 }
 
+type DeepMergeValue = string | number | boolean | null | undefined | DeepMergeValue[] | { [key: string]: DeepMergeValue };
+
 /**
  * Merge profundo de objetos
- * 
- * @private
- * @param {Object} target - Objeto alvo
- * @param {Object} source - Objeto fonte
- * @returns {Object} Objeto merged
  */
-function deepMerge(target, source) {
+function deepMerge(
+  target: Record<string, DeepMergeValue>,
+  source: Record<string, DeepMergeValue>
+): Record<string, DeepMergeValue> {
   const result = { ...target };
 
   for (const key in source) {
-    if (source.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(source, key)) {
       const targetValue = result[key];
       const sourceValue = source[key];
 
       if (Array.isArray(targetValue) && Array.isArray(sourceValue)) {
         // Arrays: concatenar e remover duplicatas
-        result[key] = [...new Set([...targetValue, ...sourceValue])];
+        result[key] = [...new Set([...targetValue, ...sourceValue])] as DeepMergeValue[];
       } else if (
         typeof targetValue === 'object' &&
         targetValue !== null &&
@@ -261,7 +228,10 @@ function deepMerge(target, source) {
         !Array.isArray(sourceValue)
       ) {
         // Objetos: merge recursivo
-        result[key] = deepMerge(targetValue, sourceValue);
+        result[key] = deepMerge(
+          targetValue as Record<string, DeepMergeValue>,
+          sourceValue as Record<string, DeepMergeValue>
+        );
       } else {
         // Primitivos: substituir
         result[key] = sourceValue;
@@ -272,20 +242,25 @@ function deepMerge(target, source) {
   return result;
 }
 
+export interface DefaultConfigOptions {
+  version?: string;
+  contexts?: string[];
+  ides?: string[];
+  integrations?: Record<string, unknown>;
+  created?: string;
+  [key: string]: unknown;
+}
+
 /**
  * Cria configuração padrão
- * 
- * @param {Object} options - Opções para configuração
- * @returns {Object} Configuração padrão
  */
-export function createDefaultConfig(options = {}) {
+export function createDefaultConfig(options: DefaultConfigOptions = {}): OnionConfig {
   return {
     version: options.version || '4.0.0',
     contexts: options.contexts || [],
     ides: options.ides || ['cursor'],
     integrations: options.integrations || {},
     created: options.created || new Date().toISOString(),
-    ...options
+    ...options,
   };
 }
-

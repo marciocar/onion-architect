@@ -1,74 +1,72 @@
 /**
  * Pretty console logger
  */
-const chalk = require('chalk');
-const ora = require('ora');
+import chalk from 'chalk';
+import ora, { type Ora } from 'ora';
 
 class Logger {
-  constructor() {
-    this.spinner = null;
-  }
-  
+  private spinner: Ora | null = null;
+
   // Títulos
-  title(text) {
+  title(text: string): void {
     console.log('\n' + chalk.cyan.bold('━'.repeat(60)));
     console.log(chalk.cyan.bold(`  ${text}`));
     console.log(chalk.cyan.bold('━'.repeat(60)));
   }
-  
+
   // Seções
-  section(text) {
+  section(text: string): void {
     console.log('\n' + chalk.white.bold(text));
   }
-  
+
   // Sucesso
-  success(text) {
+  success(text: string): void {
     console.log(chalk.green('✅ ') + text);
   }
-  
+
   // Info
-  info(text) {
+  info(text: string): void {
     console.log(chalk.blue('ℹ️  ') + text);
   }
-  
+
   // Warning
-  warn(text) {
+  warn(text: string): void {
     console.log(chalk.yellow('⚠️  ') + text);
   }
-  
+
   // Erro
-  error(text) {
+  error(text: string): void {
     console.log(chalk.red('❌ ') + text);
   }
-  
+
   // Spinner
-  startSpinner(text) {
+  startSpinner(text: string): void {
     this.spinner = ora(text).start();
   }
-  
-  stopSpinner(success = true, text = null) {
+
+  stopSpinner(success = true, text: string | null = null): void {
     if (!this.spinner) return;
-    
+
     if (success) {
-      this.spinner.succeed(text);
+      this.spinner.succeed(text ?? undefined);
     } else {
-      this.spinner.fail(text);
+      this.spinner.fail(text ?? undefined);
     }
     this.spinner = null;
   }
-  
+
   // Lista
-  list(items, prefix = '  ∟') {
-    items.forEach(item => {
+  list(items: string[], prefix = '  ∟'): void {
+    items.forEach((item) => {
       console.log(chalk.gray(prefix) + ' ' + item);
     });
   }
-  
+
   // Quebra
-  break() {
+  break(): void {
     console.log();
   }
 }
 
-module.exports = new Logger();
-
+export const logger = new Logger();
+export default logger;

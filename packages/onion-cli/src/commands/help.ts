@@ -1,9 +1,9 @@
 /**
  * onion help - Mostrar ajuda
  */
-const chalk = require('chalk');
+import chalk from 'chalk';
 
-async function helpCommand(command) {
+export async function help(command?: string): Promise<void> {
   if (!command) {
     // Ajuda geral
     console.log(`
@@ -42,5 +42,4 @@ ${chalk.cyan.bold('━'.repeat(60))}
   }
 }
 
-module.exports = helpCommand;
-
+export default help;

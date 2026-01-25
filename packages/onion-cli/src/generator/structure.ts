@@ -1,7 +1,7 @@
 /**
  * @fileoverview Structure Generator - Métodos atômicos e reutilizáveis
  * @module generator/structure
- * 
+ *
  * Princípios:
  * - Métodos atômicos (1 responsabilidade cada)
  * - Reutilizáveis por init, add, migrate
@@ -10,17 +10,26 @@
  */
 
 import fs from 'fs-extra';
-import path from 'path';
+import path from 'node:path';
+import yaml from 'yaml';
+
+export interface ContextOptions {
+  includeREADME?: boolean;
+  includeConfig?: boolean;
+  type?: string;
+}
+
+export interface IDELoaderConfig {
+  contexts?: string[];
+  [key: string]: unknown;
+}
 
 /**
  * Cria estrutura core completa (.onion/core/)
- * 
- * @param {string} projectRoot - Raiz do projeto
- * @returns {Promise<void>}
  */
-export async function generateCoreStructure(projectRoot) {
+export async function generateCoreStructure(projectRoot: string): Promise<void> {
   const onionRoot = path.join(projectRoot, '.onion');
-  
+
   const corePaths = [
     'core/knowbase/concepts',
     'core/knowbase/frameworks',
@@ -29,9 +38,9 @@ export async function generateCoreStructure(projectRoot) {
     'core/agents',
     'core/commands',
     'core/rules',
-    'core/utils'
+    'core/utils',
   ];
-  
+
   for (const p of corePaths) {
     await fs.ensureDir(path.join(onionRoot, p));
   }
@@ -39,16 +48,15 @@ export async function generateCoreStructure(projectRoot) {
 
 /**
  * Cria estrutura de um contexto específico
- * 
- * @param {string} projectRoot - Raiz do projeto
- * @param {string} contextName - Nome do contexto
- * @param {Object} options - Opções de geração
- * @returns {Promise<void>}
  */
-export async function generateContextStructure(projectRoot, contextName, options = {}) {
+export async function generateContextStructure(
+  projectRoot: string,
+  contextName: string,
+  options: ContextOptions = {}
+): Promise<void> {
   const onionRoot = path.join(projectRoot, '.onion');
   const contextRoot = path.join(onionRoot, 'contexts', contextName);
-  
+
   // Estrutura base
   const basePaths = [
     'knowbase',
@@ -56,39 +64,33 @@ export async function generateContextStructure(projectRoot, contextName, options
     'commands/starter',
     'commands/intermediate',
     'commands/advanced',
-    'sessions'
+    'sessions',
   ];
-  
+
   for (const p of basePaths) {
     await fs.ensureDir(path.join(contextRoot, p));
   }
-  
+
   // README do contexto (opcional)
   if (options.includeREADME !== false) {
     await generateContextREADME(projectRoot, contextName);
   }
-  
+
   // Config do contexto (opcional)
   if (options.includeConfig !== false) {
-    await generateContextConfig(projectRoot, contextName);
+    await generateContextConfig(projectRoot, contextName, { type: options.type });
   }
 }
 
 /**
  * Cria README de contexto
- * 
- * @param {string} projectRoot - Raiz do projeto
- * @param {string} contextName - Nome do contexto
- * @returns {Promise<void>}
  */
-export async function generateContextREADME(projectRoot, contextName) {
-  const readmePath = path.join(
-    projectRoot,
-    '.onion/contexts',
-    contextName,
-    'README.md'
-  );
-  
+export async function generateContextREADME(
+  projectRoot: string,
+  contextName: string
+): Promise<void> {
+  const readmePath = path.join(projectRoot, '.onion/contexts', contextName, 'README.md');
+
   const content = `# ${capitalizeFirst(contextName)} Context
 
 > **Onion v4.0** | Multi-Context Development Orchestrator
@@ -118,82 +120,78 @@ O contexto **${contextName}** é dedicado a [descrever propósito].
 **Versão**: 4.0.0  
 **Criado**: ${new Date().toISOString().split('T')[0]}
 `;
-  
+
   await fs.writeFile(readmePath, content, 'utf-8');
 }
 
 /**
  * Cria config de contexto (.context-config.yml)
- * 
- * @param {string} projectRoot - Raiz do projeto
- * @param {string} contextName - Nome do contexto
- * @param {Object} config - Configuração do contexto
- * @returns {Promise<void>}
  */
-export async function generateContextConfig(projectRoot, contextName, config = {}) {
-  const yaml = (await import('yaml')).default;
-  
+export async function generateContextConfig(
+  projectRoot: string,
+  contextName: string,
+  config: { type?: string; integrations?: Record<string, unknown> } = {}
+): Promise<void> {
   const configPath = path.join(
     projectRoot,
     '.onion/contexts',
     contextName,
     '.context-config.yml'
   );
-  
+
   const defaultConfig = {
     context: {
       name: contextName,
       version: '4.0.0',
-      type: config.type || 'custom'
+      type: config.type || 'custom',
     },
-    integrations: config.integrations || {}
+    integrations: config.integrations || {},
   };
-  
+
   await fs.writeFile(configPath, yaml.stringify(defaultConfig), 'utf-8');
 }
 
 /**
  * Cria comandos starter para um contexto
- * 
- * @param {string} projectRoot - Raiz do projeto
- * @param {string} contextName - Nome do contexto
- * @param {string} contextType - Tipo do contexto (business, technical, custom)
- * @returns {Promise<void>}
  */
-export async function generateStarterCommands(projectRoot, contextName, contextType) {
+export async function generateStarterCommands(
+  projectRoot: string,
+  contextName: string,
+  contextType: string
+): Promise<void> {
   const starterPath = path.join(
     projectRoot,
     '.onion/contexts',
     contextName,
     'commands/starter'
   );
-  
+
   // Comandos básicos universais
   const starterCommands = [
     {
       name: 'help',
       description: `Show ${contextName} context help`,
-      content: generateHelpCommandContent(contextName, contextType)
+      content: generateHelpCommandContent(contextName, contextType),
     },
     {
       name: 'warm-up',
       description: `Warm up ${contextName} context`,
-      content: generateWarmUpCommandContent(contextName)
-    }
+      content: generateWarmUpCommandContent(contextName),
+    },
   ];
-  
+
   // Adicionar comandos específicos por tipo
   if (contextType === 'business') {
     starterCommands.push(
       {
         name: 'spec',
         description: 'Create product specification',
-        content: generateBusinessSpecContent()
+        content: generateBusinessSpecContent(),
       },
       {
         name: 'task',
         description: 'Create task with story points',
-        content: generateBusinessTaskContent()
+        content: generateBusinessTaskContent(),
       }
     );
   } else if (contextType === 'technical') {
@@ -201,16 +199,16 @@ export async function generateStarterCommands(projectRoot, contextName, contextT
       {
         name: 'plan',
         description: 'Create development plan',
-        content: generateTechnicalPlanContent()
+        content: generateTechnicalPlanContent(),
       },
       {
         name: 'work',
         description: 'Continue work on feature',
-        content: generateTechnicalWorkContent()
+        content: generateTechnicalWorkContent(),
       }
     );
   }
-  
+
   // Criar arquivos
   for (const cmd of starterCommands) {
     const filePath = path.join(starterPath, `${cmd.name}.md`);
@@ -220,18 +218,17 @@ export async function generateStarterCommands(projectRoot, contextName, contextT
 
 /**
  * Gera estrutura de IDEs (.onion/ide/)
- * 
- * @param {string} projectRoot - Raiz do projeto
- * @param {string[]} ides - Lista de IDEs
- * @returns {Promise<void>}
  */
-export async function generateIDEStructure(projectRoot, ides = []) {
+export async function generateIDEStructure(
+  projectRoot: string,
+  ides: string[] = []
+): Promise<void> {
   const idePath = path.join(projectRoot, '.onion/ide');
   await fs.ensureDir(idePath);
-  
+
   // Universal fallback (sempre criar)
   await fs.ensureDir(path.join(idePath, 'universal'));
-  
+
   // IDEs específicos
   for (const ide of ides) {
     if (ide !== 'universal') {
@@ -242,16 +239,15 @@ export async function generateIDEStructure(projectRoot, ides = []) {
 
 /**
  * Gera loader para IDE específico
- * 
- * @param {string} projectRoot - Raiz do projeto
- * @param {string} ideName - Nome do IDE
- * @param {Object} config - Configuração (contexts, commands)
- * @returns {Promise<void>}
  */
-export async function generateIDELoader(projectRoot, ideName, config = {}) {
+export async function generateIDELoader(
+  projectRoot: string,
+  ideName: string,
+  config: IDELoaderConfig = {}
+): Promise<void> {
   const loaderPath = path.join(projectRoot, '.onion/ide', ideName);
   await fs.ensureDir(loaderPath);
-  
+
   // Conteúdo do loader depende do IDE
   if (ideName === 'cursor') {
     await generateCursorLoader(projectRoot, config);
@@ -264,13 +260,12 @@ export async function generateIDELoader(projectRoot, ideName, config = {}) {
 
 /**
  * Atualiza loader de IDE com novo contexto
- * 
- * @param {string} projectRoot - Raiz do projeto
- * @param {string} ideName - Nome do IDE
- * @param {string} newContext - Novo contexto a adicionar
- * @returns {Promise<void>}
  */
-export async function updateIDELoader(projectRoot, ideName, newContext) {
+export async function updateIDELoader(
+  projectRoot: string,
+  ideName: string,
+  _newContext: string
+): Promise<void> {
   // TODO: Implementar atualização de loaders existentes
   // Por agora, regenerar loader completo
   const { readConfig } = await import('../core/config.js');
@@ -280,15 +275,14 @@ export async function updateIDELoader(projectRoot, ideName, newContext) {
 
 /**
  * Gera estrutura de documentação
- * 
- * @param {string} projectRoot - Raiz do projeto
- * @param {string[]} contexts - Lista de contextos
- * @returns {Promise<void>}
  */
-export async function generateDocsStructure(projectRoot, contexts = []) {
+export async function generateDocsStructure(
+  projectRoot: string,
+  contexts: string[] = []
+): Promise<void> {
   // docs/onion/ (documentação do sistema)
   await fs.ensureDir(path.join(projectRoot, 'docs/onion'));
-  
+
   // docs/{context}-context/ (documentação por contexto)
   for (const ctx of contexts) {
     await fs.ensureDir(path.join(projectRoot, `docs/${ctx}-context`));
@@ -299,11 +293,11 @@ export async function generateDocsStructure(projectRoot, contexts = []) {
 // HELPERS PRIVADOS
 // ============================================================================
 
-function capitalizeFirst(str) {
+function capitalizeFirst(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-function generateHelpCommandContent(contextName, contextType) {
+function generateHelpCommandContent(contextName: string, contextType: string): string {
   return `---
 name: help
 description: Show ${contextName} context commands by level
@@ -324,7 +318,7 @@ Run: \`/${contextName}/help\` or \`/${contextName}/help --level=starter\`
 `;
 }
 
-function generateWarmUpCommandContent(contextName) {
+function generateWarmUpCommandContent(contextName: string): string {
   return `---
 name: warm-up
 description: Warm up ${contextName} context with project information
@@ -343,7 +337,7 @@ Load project context and recent activity.
 `;
 }
 
-function generateBusinessSpecContent() {
+function generateBusinessSpecContent(): string {
   return `---
 name: spec
 description: Create product specification
@@ -361,7 +355,7 @@ Create detailed product specification for a feature.
 `;
 }
 
-function generateBusinessTaskContent() {
+function generateBusinessTaskContent(): string {
   return `---
 name: task
 description: Create task with story points
@@ -379,7 +373,7 @@ Create task in task manager with story points and acceptance criteria.
 `;
 }
 
-function generateTechnicalPlanContent() {
+function generateTechnicalPlanContent(): string {
   return `---
 name: plan
 description: Create development plan
@@ -397,7 +391,7 @@ Create structured development plan with phases and tasks.
 `;
 }
 
-function generateTechnicalWorkContent() {
+function generateTechnicalWorkContent(): string {
   return `---
 name: work
 description: Continue work on active feature
@@ -415,26 +409,35 @@ Continue development on active feature, reading session and identifying next pha
 `;
 }
 
-async function generateCursorLoader(projectRoot, config) {
+async function generateCursorLoader(
+  projectRoot: string,
+  config: IDELoaderConfig
+): Promise<void> {
   // Criar .cursor/ na raiz (para Cursor reconhecer)
   const cursorRoot = path.join(projectRoot, '.cursor');
   await fs.ensureDir(cursorRoot);
-  
+
   // Criar subpastas por contexto
   for (const ctx of config.contexts || []) {
     await fs.ensureDir(path.join(cursorRoot, 'commands', ctx));
     await fs.ensureDir(path.join(cursorRoot, 'agents', ctx));
   }
-  
+
   // TODO: Criar symlinks de .onion/ → .cursor/
 }
 
-async function generateWindsurfLoader(projectRoot, config) {
+async function generateWindsurfLoader(
+  _projectRoot: string,
+  _config: IDELoaderConfig
+): Promise<void> {
   // TODO: Implementar loader Windsurf quando disponível
   console.log('Windsurf loader: not implemented yet');
 }
 
-async function generateClaudeLoader(projectRoot, config) {
+async function generateClaudeLoader(
+  _projectRoot: string,
+  _config: IDELoaderConfig
+): Promise<void> {
   // TODO: Implementar loader Claude quando disponível
   console.log('Claude loader: not implemented yet');
 }

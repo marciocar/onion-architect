@@ -1,7 +1,7 @@
 /**
  * @fileoverview Core Detector - Detecta projetos Onion e suas versões
  * @module core/detector
- * 
+ *
  * Princípios:
  * - Mínimas dependências (apenas fs-extra)
  * - Detecção robusta de v3 e v4
@@ -9,15 +9,38 @@
  */
 
 import fs from 'fs-extra';
-import path from 'path';
+import path from 'node:path';
+
+export interface OnionV4Structure {
+  version: 'v4';
+  root: string;
+  onionDir: string;
+  configFile: string;
+  contextsDir: string;
+  coreDir: string;
+  ideDir: string;
+  contexts: string[];
+  ides: string[];
+}
+
+export interface OnionV3Structure {
+  version: 'v3';
+  root: string;
+  cursorDir: string;
+  commandsDir: string;
+  agentsDir: string;
+  commands: Record<string, string[]>;
+  agents: Record<string, string[]>;
+  hasRules: boolean;
+  hasSessions: boolean;
+}
+
+export type OnionProject = OnionV4Structure | OnionV3Structure;
 
 /**
  * Detecta se é projeto Onion e qual versão
- * 
- * @param {string} projectRoot - Caminho raiz do projeto
- * @returns {Promise<Object|null>} { version: 'v3'|'v4', structure: {...} } ou null
  */
-export async function detectOnionProject(projectRoot) {
+export async function detectOnionProject(projectRoot: string): Promise<OnionProject | null> {
   // Tentar v4 primeiro (mais recente)
   const v4 = await detectOnionV4Structure(projectRoot);
   if (v4) return v4;
@@ -31,16 +54,13 @@ export async function detectOnionProject(projectRoot) {
 
 /**
  * Detecta estrutura Onion v4
- * 
+ *
  * Características v4:
  * - Pasta `.onion/` na raiz
  * - Arquivo `.onion-config.yml`
  * - Estrutura `.onion/contexts/`
- * 
- * @param {string} projectRoot - Caminho raiz do projeto
- * @returns {Promise<Object|null>} Estrutura v4 ou null
  */
-export async function detectOnionV4Structure(projectRoot) {
+export async function detectOnionV4Structure(projectRoot: string): Promise<OnionV4Structure | null> {
   try {
     const onionDir = path.join(projectRoot, '.onion');
     const configFile = path.join(projectRoot, '.onion-config.yml');
@@ -62,7 +82,7 @@ export async function detectOnionV4Structure(projectRoot) {
     }
 
     // Ler estrutura
-    const structure = {
+    const structure: OnionV4Structure = {
       version: 'v4',
       root: projectRoot,
       onionDir,
@@ -71,17 +91,21 @@ export async function detectOnionV4Structure(projectRoot) {
       coreDir: path.join(onionDir, 'core'),
       ideDir: path.join(onionDir, 'ide'),
       contexts: [],
-      ides: []
+      ides: [],
     };
 
     // Listar contextos
     try {
       const contextDirs = await fs.readdir(contextsDir);
-      structure.contexts = contextDirs.filter(async (name) => {
+      const validContexts: string[] = [];
+      for (const name of contextDirs) {
         const stat = await fs.stat(path.join(contextsDir, name));
-        return stat.isDirectory();
-      });
-    } catch (err) {
+        if (stat.isDirectory()) {
+          validContexts.push(name);
+        }
+      }
+      structure.contexts = validContexts;
+    } catch {
       structure.contexts = [];
     }
 
@@ -90,33 +114,34 @@ export async function detectOnionV4Structure(projectRoot) {
     if (await fs.pathExists(ideDir)) {
       try {
         const ideDirs = await fs.readdir(ideDir);
-        structure.ides = ideDirs.filter(async (name) => {
+        const validIdes: string[] = [];
+        for (const name of ideDirs) {
           const stat = await fs.stat(path.join(ideDir, name));
-          return stat.isDirectory();
-        });
-      } catch (err) {
+          if (stat.isDirectory()) {
+            validIdes.push(name);
+          }
+        }
+        structure.ides = validIdes;
+      } catch {
         structure.ides = [];
       }
     }
 
     return structure;
-  } catch (error) {
+  } catch {
     return null;
   }
 }
 
 /**
  * Detecta estrutura Onion v3
- * 
+ *
  * Características v3:
  * - Pasta `.cursor/` na raiz
  * - Subpastas `.cursor/commands/` e `.cursor/agents/`
  * - Sem `.onion/` ou `.onion-config.yml`
- * 
- * @param {string} projectRoot - Caminho raiz do projeto
- * @returns {Promise<Object|null>} Estrutura v3 ou null
  */
-export async function detectOnionV3Structure(projectRoot) {
+export async function detectOnionV3Structure(projectRoot: string): Promise<OnionV3Structure | null> {
   try {
     const cursorDir = path.join(projectRoot, '.cursor');
     const commandsDir = path.join(cursorDir, 'commands');
@@ -142,7 +167,7 @@ export async function detectOnionV3Structure(projectRoot) {
     }
 
     // Ler estrutura
-    const structure = {
+    const structure: OnionV3Structure = {
       version: 'v3',
       root: projectRoot,
       cursorDir,
@@ -151,7 +176,7 @@ export async function detectOnionV3Structure(projectRoot) {
       commands: {},
       agents: {},
       hasRules: false,
-      hasSessions: false
+      hasSessions: false,
     };
 
     // Listar categorias de comandos
@@ -161,13 +186,13 @@ export async function detectOnionV3Structure(projectRoot) {
         for (const category of categories) {
           const categoryPath = path.join(commandsDir, category);
           const stat = await fs.stat(categoryPath);
-          
+
           if (stat.isDirectory()) {
             const files = await fs.readdir(categoryPath);
-            structure.commands[category] = files.filter(f => f.endsWith('.md'));
+            structure.commands[category] = files.filter((f) => f.endsWith('.md'));
           }
         }
-      } catch (err) {
+      } catch {
         structure.commands = {};
       }
     }
@@ -179,13 +204,13 @@ export async function detectOnionV3Structure(projectRoot) {
         for (const category of categories) {
           const categoryPath = path.join(agentsDir, category);
           const stat = await fs.stat(categoryPath);
-          
+
           if (stat.isDirectory()) {
             const files = await fs.readdir(categoryPath);
-            structure.agents[category] = files.filter(f => f.endsWith('.md'));
+            structure.agents[category] = files.filter((f) => f.endsWith('.md'));
           }
         }
-      } catch (err) {
+      } catch {
         structure.agents = {};
       }
     }
@@ -199,40 +224,32 @@ export async function detectOnionV3Structure(projectRoot) {
     structure.hasSessions = await fs.pathExists(sessionsDir);
 
     return structure;
-  } catch (error) {
+  } catch {
     return null;
   }
 }
 
 /**
  * Verifica se path é projeto Onion (qualquer versão)
- * 
- * @param {string} projectRoot - Caminho raiz do projeto
- * @returns {Promise<boolean>} true se é projeto Onion
  */
-export async function isOnionProject(projectRoot) {
+export async function isOnionProject(projectRoot: string): Promise<boolean> {
   const project = await detectOnionProject(projectRoot);
   return project !== null;
 }
 
 /**
  * Obtém versão do projeto Onion
- * 
- * @param {string} projectRoot - Caminho raiz do projeto
- * @returns {Promise<string|null>} 'v3', 'v4' ou null
  */
-export async function getOnionVersion(projectRoot) {
+export async function getOnionVersion(projectRoot: string): Promise<'v3' | 'v4' | null> {
   const project = await detectOnionProject(projectRoot);
   return project ? project.version : null;
 }
 
 /**
  * Detecta IDEs instalados no sistema
- * 
- * @returns {Promise<string[]>} Lista de IDEs detectados
  */
-export async function detectInstalledIDEs() {
-  const detected = [];
+export async function detectInstalledIDEs(): Promise<string[]> {
+  const detected: string[] = [];
 
   // Cursor (verifica se .cursor/ existe no projeto atual)
   const cursorDir = path.join(process.cwd(), '.cursor');
@@ -242,7 +259,7 @@ export async function detectInstalledIDEs() {
 
   // Windsurf (verifica configurações conhecidas)
   // TODO: Implementar detecção real quando Windsurf estiver disponível
-  
+
   // Claude Code (verifica configurações conhecidas)
   // TODO: Implementar detecção real quando Claude Code estiver disponível
 
@@ -254,14 +271,16 @@ export async function detectInstalledIDEs() {
   return detected;
 }
 
+export interface MigrationEligibility {
+  canMigrate: boolean;
+  issues: string[];
+}
+
 /**
  * Valida se projeto pode ser migrado
- * 
- * @param {Object} v3Structure - Estrutura v3 detectada
- * @returns {Object} { canMigrate: boolean, issues: string[] }
  */
-export function validateMigrationEligibility(v3Structure) {
-  const issues = [];
+export function validateMigrationEligibility(v3Structure: OnionV3Structure | null): MigrationEligibility {
+  const issues: string[] = [];
 
   if (!v3Structure || v3Structure.version !== 'v3') {
     return { canMigrate: false, issues: ['Não é um projeto Onion v3'] };
@@ -287,4 +306,3 @@ export function validateMigrationEligibility(v3Structure) {
 
   return { canMigrate, issues };
 }
-

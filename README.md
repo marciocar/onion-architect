@@ -72,7 +72,8 @@ This is a **beta release** focused on:
 
 ### Prerequisites
 
-- Node.js >= 16.0.0
+- Node.js >= 18.0.0
+- pnpm >= 9.0.0
 - Cursor IDE (recommended)
 - Existing Onion v3 project OR new project
 
@@ -110,23 +111,36 @@ cursor .
 /technical/pr
 ```
 
-#### Option 3: CLI (Basic - Beta.2 will be fully functional)
+#### Option 3: CLI
 
 ```bash
-# Install CLI
-cd packages/onion-cli
+# Clone and install dependencies
+git clone https://github.com/your-org/onion-v4.git
+cd onion-v4
 pnpm install
-pnpm link
+
+# Build the CLI
+pnpm build
+
+# Link globally for local use
+cd packages/onion-cli && pnpm link --global
 
 # Verify installation
 onion --version
-# Expected: 4.0.0-beta.1
+# Expected: 4.1.0-beta.1
 
 # See available commands
 onion --help
+
+# Initialize a new project
+onion init
 ```
 
-**Note**: Full CLI functionality (`init`, `add`, `migrate`) coming in v4.0.0-beta.2
+**Available Commands:**
+- `onion init` - Initialize new Onion project
+- `onion add` - Add context or IDE (coming soon)
+- `onion migrate` - Migrate from v3 to v4 (coming soon)
+- `onion validate` - Validate structure (coming soon)
 
 ---
 
@@ -189,7 +203,7 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## 🐛 Known Issues (Beta)
 
-1. **CLI Commands**: `init`, `add`, `migrate` need ES6/CommonJS refactoring
+1. **CLI Commands**: `add`, `migrate`, `validate` implementation in progress
 2. **IDE Support**: Only Cursor fully supported (Windsurf/Claude in FASE 5)
 3. **Contexts**: Only Business/Technical implemented (others in FASE 6+)
 4. **Tests**: Missing E2E integration tests
@@ -202,8 +216,8 @@ See [GitHub Issues](#) for complete list.
 
 ### v4.0.0-beta.2 (Est. 1-2 weeks)
 
-- Fix CLI implementation (CommonJS)
-- Complete `init`, `add`, `migrate` commands
+- ✅ CLI migrated to TypeScript with pnpm workspaces
+- Complete `add`, `migrate`, `validate` commands
 - Add E2E tests
 
 ### v4.0.0-beta.3 (Est. 3-4 weeks)
@@ -264,6 +278,45 @@ This release represents:
 
 ---
 
+## 🛠️ Development
+
+This is a **pnpm workspace** monorepo with TypeScript.
+
+### Workspace Commands
+
+```bash
+# Install all dependencies
+pnpm install
+
+# Build all packages
+pnpm build
+
+# Run CLI in dev mode (watch)
+pnpm dev
+
+# Type check
+pnpm --filter @onion/cli typecheck
+
+# Lint
+pnpm --filter @onion/cli lint
+```
+
+### Project Structure
+
+```
+onion-architect/
+├── package.json              # Workspace root
+├── pnpm-workspace.yaml       # Workspace config
+├── tsconfig.base.json        # Shared TypeScript config
+└── packages/
+    └── onion-cli/            # CLI package (@onion/cli)
+        ├── src/              # TypeScript source
+        ├── dist/             # Compiled output
+        └── bin/onion.js      # CLI entry point
+```
+
+---
+
 ## 🔗 Links
 
 - **Documentation**: [docs/](docs/)
@@ -278,6 +331,6 @@ This release represents:
 
 ---
 
-**Last Updated**: 2025-12-20  
-**Version**: 4.0.0-beta.1  
-**Status**: Beta - Documentation Complete, CLI in Progress
+**Last Updated**: 2026-01-25  
+**Version**: 4.1.0-beta.1  
+**Status**: Beta - TypeScript CLI with pnpm workspaces
